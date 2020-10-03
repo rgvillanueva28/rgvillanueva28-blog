@@ -30,8 +30,13 @@ h6 {
 p {
   @apply text-base;
 }
-a {
+.markdown a {
   @apply text-base;
+  color: theme("colors.accent.light");
+}
+.markdown a:hover {
+  color: theme("colors.accent.mid");
+  text-decoration: underline;
 }
 
 @tailwind components;

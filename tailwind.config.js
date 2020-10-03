@@ -22,12 +22,14 @@ module.exports = {
           mid: "#134074",
         },
         foreground: "#EEF4ED",
-      }
+      },
     },
-
   },
   variants: {
-    animation: ['responsive', 'hover', 'focus'],
+    animation: ["responsive", "hover", "focus"],
+    scale: ["responsive", "hover", "focus", "active", "group-hover"],
+    width: ["responsive", "hover", "focus"],
+    height: ["responsive", "hover", "focus"]
   },
   plugins: [],
   future: {
