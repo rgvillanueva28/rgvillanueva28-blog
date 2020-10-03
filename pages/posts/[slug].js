@@ -48,7 +48,7 @@ export async function getStaticProps({ params }) {
   );
   const post = await res.json();
   const content = await remark().use(html).process(post[0].content);
-  const contentHtml = await content.toString().replace("a href", "a target=\"_blank\" href")
+  const contentHtml = await content.toString().replace(/a\shref/g, "a target=\"_blank\" href")
 
   return {
     props: {
