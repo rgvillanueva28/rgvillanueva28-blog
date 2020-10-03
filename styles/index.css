@@ -31,7 +31,6 @@ p {
   @apply text-base;
 }
 .markdown a {
-  @apply text-base;
   color: theme("colors.accent.light");
 }
 .markdown a:hover {

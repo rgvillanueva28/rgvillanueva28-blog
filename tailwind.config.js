@@ -1,5 +1,5 @@
 module.exports = {
-  important: true,
+  important: false,
   purge: [],
   theme: {
     extend: {},
@@ -28,8 +28,7 @@ module.exports = {
   variants: {
     animation: ["responsive", "hover", "focus"],
     scale: ["responsive", "hover", "focus", "active", "group-hover"],
-    width: ["responsive", "hover", "focus"],
-    height: ["responsive", "hover", "focus"]
+    borderRadius: ['responsive', 'hover', 'focus'],
   },
   plugins: [],
   future: {
