@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 function PostCard({ image, title, content, date, slug }) {
-  console.log(date)
   return (
     <div className="transition-all duration-150 flex flex-wrap w-full px-4 py-6 md:w-1/2 lg:w-1/3">
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
