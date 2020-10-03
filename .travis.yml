@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - "stable"
+cache: yarn
+
+install:
+  - yarn install
+
+script:
+  - yarn build
+
+after_success:
+  - touch out/.nojekyll
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local_dir: out
+  target-branch: master
+  repo: rgvillanueva28/blog
+  keep-history: true
+  on:
+    branch: master
