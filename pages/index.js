@@ -114,8 +114,8 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("https://rgvillanueva28-strapi.herokuapp.com/posts/");
-  const posts = await res.json();
+  const response = await fetch("https://rgvillanueva28-strapi.herokuapp.com/posts");
+  const posts = await response.json();
   return {
     props: {
       posts,

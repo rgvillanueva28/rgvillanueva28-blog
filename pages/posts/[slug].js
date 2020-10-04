@@ -4,6 +4,7 @@ import html from "remark-html";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Home({ post, contentHtml }) {
+  const dateCreated = new Date(post[0].date);
   return (
     <AnimatePresence>
       <motion.div
@@ -21,7 +22,13 @@ export default function Home({ post, contentHtml }) {
 
         <main className="container">
           <h2 className="text-center">{post[0].title}</h2>
-          <p>{post[0].date}</p>
+          <p>
+            {new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+            }).format(dateCreated)}
+          </p>
           <div className="w-full">
             <img
               src={post[0].coverImage[0].formats.medium.url}
