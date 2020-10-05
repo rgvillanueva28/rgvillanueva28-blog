@@ -1,4 +1,4 @@
-@tailwind base;
+@import 'tailwindcss/base';
 
 @font-face {
   font-family: Roboto;
@@ -38,6 +38,6 @@ p {
   text-decoration: underline;
 }
 
-@tailwind components;
+@import 'tailwindcss/components';
 
-@tailwind utilities;
+@import 'tailwindcss/utilities';

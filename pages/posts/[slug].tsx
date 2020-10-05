@@ -3,7 +3,12 @@ import remark from "remark";
 import html from "remark-html";
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function Home({ post, contentHtml }) {
+export interface postsProps{
+  post: Array<any>;
+  contentHtml: string;
+}
+
+export default function Home({ post, contentHtml }: postsProps) {
   const dateCreated = new Date(post[0].date);
   return (
     <AnimatePresence>
@@ -52,7 +57,7 @@ export async function getStaticPaths() {
   const res = await fetch("https://rgvillanueva28-strapi.herokuapp.com/posts/");
   const posts = await res.json();
   return {
-    paths: posts.map((post) => ({
+    paths: posts.map((post: any) => ({
       params: {
         slug: post.slug,
       },
@@ -62,7 +67,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: any) {
   const res = await fetch(
     `https://rgvillanueva28-strapi.herokuapp.com/posts?slug_eq=${params.slug}`
   );
