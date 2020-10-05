@@ -4,8 +4,8 @@ import Header from "../components/header";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function LayoutComponent({ children }: any) {
-  let listener: any;
+export default function LayoutComponent({ children }) {
+  let listener;
   const [onTop, setOnTop] = useState(true);
 
   useEffect(() => {
