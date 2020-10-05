@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { motion, AnimateSharedLayout } from "framer-motion";
 
-function PostCard({ image, title, content, date, slug }) {
+export interface postCardProps {
+  image: string;
+  title: string;
+  content: string;
+  date: string;
+  slug: string;
+}
+
+function PostCard({ image, title, content, date, slug }: postCardProps) {
   const dateCreated = new Date(date);
   return (
     <div className="flex flex-wrap w-full px-4 py-6 md:w-1/2 lg:w-1/3">

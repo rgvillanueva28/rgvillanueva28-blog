@@ -28,10 +28,11 @@ module.exports = {
   variants: {
     animation: ["responsive", "hover", "focus"],
     scale: ["responsive", "hover", "focus", "active", "group-hover"],
-    borderRadius: ['responsive', 'hover', 'focus'],
+    borderRadius: ["responsive", "hover", "focus"],
   },
   plugins: [],
   future: {
     removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
 };
