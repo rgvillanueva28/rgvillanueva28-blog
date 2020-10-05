@@ -2,6 +2,8 @@ import Head from "next/head";
 import PostCardDiv from "../components/postCardDiv"
 import PostCard from "../components/postCard";
 import { AnimatePresence, motion } from "framer-motion";
+import Header from "../components/header"
+import Layout from "../components/layout"
 
 export interface indexProps {
   posts: Array<any> | undefined;
@@ -11,6 +13,7 @@ export default function Home({ posts }: indexProps) {
 
   return (
     <AnimatePresence>
+      <Layout>
         <motion.div
           key="home"
           className="container"
@@ -40,6 +43,7 @@ export default function Home({ posts }: indexProps) {
             </PostCardDiv>
           </main>
         </motion.div>
+      </Layout>
 
     </AnimatePresence>
   );
