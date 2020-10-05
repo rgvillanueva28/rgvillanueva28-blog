@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: theme("colors.foreground")
+  background-color: theme("colors.accent.mid")
 }
 
 h1 {

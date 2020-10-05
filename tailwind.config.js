@@ -18,13 +18,13 @@ module.exports = {
     },
     extend: {
       colors: {
-        dark: "#0B2545",
+        dark: "#05386B",
         accent: {
-          light: "#8DA9C4",
-          dark: "#13315C",
-          mid: "#134074",
+          light: "#8EE4AF",
+          dark: "#379683",
+          mid: "#5CDB95",
         },
-        foreground: "#EEF4ED",
+        foreground: "#EDF5E1",
       },
     },
   },

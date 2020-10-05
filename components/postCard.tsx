@@ -12,13 +12,13 @@ export interface postCardProps {
 function PostCard({ image, title, content, date, slug }: postCardProps) {
   const dateCreated = new Date(date);
   return (
-    <div className="flex flex-wrap w-full px-4 py-6 md:w-1/2 lg:w-1/3">
+    <div className="flex flex-wrap w-full px-4 py-6 md:w-1/2 lg:w-1/3 ">
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a>
           <AnimateSharedLayout>
             <motion.div
               layout
-              className="flex flex-col items-stretch min-h-full pb-2 bg-white shadow-md overflow-hidden"
+              className="flex flex-col items-stretch min-h-full pb-2 bg-foreground shadow-md overflow-hidden"
               initial={{ borderRadius: 10 }}
               whileHover={{
                 scale: 1.05,
@@ -38,11 +38,11 @@ function PostCard({ image, title, content, date, slug }: postCardProps) {
                   className="object-cover w-full h-full md:h-48 lg:h-32 xl:h-40"
                 ></img>
               </div>
-              <motion.div layout className="px-4 py-2 text-accent-mid h-full">
+              <motion.div layout className="px-4 py-2 text-dark h-full">
                 <h5 className="font-medium ">{title}</h5>
                 <p className="">{content}</p>
               </motion.div>
-              <p className="font-light px-4 text-sm text-gray-600 mt-auto">
+              <p className="font-light px-4 text-sm text-accent-dark mt-auto">
                 {new Intl.DateTimeFormat("en-US", {
                   year: "numeric",
                   month: "long",
