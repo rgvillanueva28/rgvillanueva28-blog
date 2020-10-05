@@ -5,23 +5,23 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function LayoutComponent({ children }: any) {
-  //   let listener = null;
+  let listener: any;
   const [onTop, setOnTop] = useState(true);
 
-  //   useEffect(() => {
-  //     listener = document.addEventListener("scroll", (e) => {
-  //       var scrolled = document.scrollingElement.scrollTop;
-  //       if (scrolled >= 60) {
-  //         setOnTop(false);
-  //       } else {
-  //         setOnTop(true);
-  //       }
-  //     });
+  useEffect(() => {
+    listener = document.addEventListener("scroll", (e) => {
+      var scrolled = document.scrollingElement.scrollTop;
+      if (scrolled >= 60) {
+        setOnTop(false);
+      } else {
+        setOnTop(true);
+      }
+    });
 
-  //     return () => {
-  //       document.removeEventListener("scroll", listener);
-  //     };
-  //   }, [onTop]);
+    return () => {
+      document.removeEventListener("scroll", listener);
+    };
+  }, [onTop]);
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function LayoutComponent({ children }: any) {
       </Head>
       <Header onTop={onTop} />
       <motion.div
-        className="pt-8"
+        className="pt-16"
         key="mainContainer"
         initial="pageInitial"
         animate="pageAnimate"

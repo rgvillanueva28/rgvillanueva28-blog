@@ -40,6 +40,16 @@ export default function Home({ posts }: indexProps) {
                   date={post.date}
                 />
               ))}
+              {posts?.map((post) => (
+                <PostCard
+                  key={post.slug}
+                  slug={post.slug}
+                  image={post.coverImage[0].formats.small.url}
+                  title={post.title}
+                  content={post.excerpt}
+                  date={post.date}
+                />
+              ))}
             </PostCardDiv>
           </main>
         </motion.div>

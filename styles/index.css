@@ -31,10 +31,13 @@ p {
   @apply text-base;
 }
 .markdown a {
-  color: theme("colors.accent.light");
+  color: theme("colors.accent.dark");
+}
+.markdown p {
+  color: theme("colors.dark");
 }
 .markdown a:hover {
-  color: theme("colors.accent.mid");
+  color: theme("colors.foreground");
   text-decoration: underline;
 }
 

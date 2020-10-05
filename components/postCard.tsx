@@ -12,7 +12,7 @@ export interface postCardProps {
 function PostCard({ image, title, content, date, slug }: postCardProps) {
   const dateCreated = new Date(date);
   return (
-    <div className="flex flex-wrap w-full px-4 py-6 md:w-1/2 lg:w-1/3 ">
+    <div className="flex flex-wrap w-full px-6 py-6 md:w-1/2 lg:w-1/3 ">
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a>
           <AnimateSharedLayout>
