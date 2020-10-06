@@ -8,7 +8,7 @@ export default function LayoutComponent({ children }: any) {
   let listener: any;
   const [onTop, setOnTop] = useState(true);
   const [isLarge, setIsLarge] = useState(
-    global.innerWidth >= 1024 ? true: false
+    global.innerWidth >= 1024 ? true : false
   );
 
   useEffect(() => {
@@ -22,14 +22,14 @@ export default function LayoutComponent({ children }: any) {
     });
 
     global.addEventListener("resize", (e) => {
-      global.innerWidth >= 1024 ? setIsLarge(true): setIsLarge(false)
+      global.innerWidth >= 1024 ? setIsLarge(true) : setIsLarge(false);
     });
 
     return () => {
       document.removeEventListener("scroll", listener);
     };
   }, [onTop, isLarge]);
-  
+
   return (
     <>
       <Head>
@@ -44,30 +44,37 @@ export default function LayoutComponent({ children }: any) {
         ></link>
       </Head>
       <Header onTop={onTop} isLarge={isLarge} />
-      <motion.div
-        className="pt-16"
-        key="mainContainer"
-        initial="pageInitial"
-        animate="pageAnimate"
-        variants={{
-          pageInitial: {
-            opacity: 0,
-            y: -100,
-          },
-          pageAnimate: {
-            opacity: 1,
-            y: 0,
-            transition: {
-              duration: 1,
-              delay: 0.25,
-              type: "spring",
-              stiffness: 500,
+      <AnimatePresence>
+        <motion.div
+          className="pt-16 container"
+          key="mainContainer"
+          initial="pageInitial"
+          animate="pageAnimate"
+          exit="pageExit"
+          variants={{
+            pageInitial: {
+              opacity: 0,
+              y: -100,
             },
-          },
-        }}
-      >
-        {children}
-      </motion.div>
+            pageAnimate: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 1,
+                delay: 0.25,
+                type: "spring",
+                stiffness: 500,
+              },
+            },
+            pageExit: {
+              opacity: 0,
+              y: 100,
+            },
+          }}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }

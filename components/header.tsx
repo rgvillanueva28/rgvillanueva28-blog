@@ -13,7 +13,7 @@ export default function Header(props: any) {
     <motion.header
       id="header"
       className={
-        "fixed w-full lg:px-16 px-6 lg:py-0 py-2 flex flex-wrap items-center transition duration-300 z-50  " +
+        "fixed w-full lg:px-16 px-6 lg:py-0 py-2 flex flex-wrap items-center transition duration-500 z-50  " +
         (props.isLarge
           ? props.onTop
             ? "bg-transparent text-dark"

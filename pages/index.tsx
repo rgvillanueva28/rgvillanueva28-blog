@@ -1,9 +1,9 @@
 import Head from "next/head";
 import PostCardDiv from "../components/postCardDiv"
 import PostCard from "../components/postCard";
-import { AnimatePresence, motion } from "framer-motion";
 import Header from "../components/header"
 import Layout from "../components/layout"
+import { motion } from "framer-motion";
 
 export interface indexProps {
   posts: Array<any> | undefined;
@@ -12,15 +12,9 @@ export interface indexProps {
 export default function Home({ posts }: indexProps) {
 
   return (
-    <AnimatePresence>
       <Layout>
-        <motion.div
-          key="home"
+        <div
           className="container"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, type: "spring", stiffness: 300 }}
-          exit={{ opacity: 0, y: 200 }}
         >
           <Head>
             <title>RANE GILLIAN | BLOG</title>
@@ -52,10 +46,8 @@ export default function Home({ posts }: indexProps) {
               ))}
             </PostCardDiv>
           </main>
-        </motion.div>
+        </div>
       </Layout>
-
-    </AnimatePresence>
   );
 }
 
