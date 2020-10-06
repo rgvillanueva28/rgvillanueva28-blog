@@ -16,16 +16,16 @@ export default function Header(props: any) {
         "fixed w-full lg:px-16 px-6 lg:py-0 py-2 flex flex-wrap items-center transition duration-300 z-50  " +
         (props.isLarge
           ? props.onTop
-            ? "bg-transparent"
-            : "bg-accent-dark"
+            ? "bg-transparent text-dark"
+            : "bg-accent-dark text-foreground"
           : toggleMenu
-          ? "bg-accent-dark"
+          ? "bg-accent-dark text-foreground"
           : props.onTop
-          ? "bg-transparent"
-          : "bg-accent-dark")
+          ? "bg-transparent text-dark"
+          : "bg-accent-dark text-foreground")
       }
     >
-      <div className="flex-1 flex justify-between items-center text-foreground">
+      <div className="flex-1 flex justify-between items-center">
         <Link href="/">
           <a className="fill-current">
             <img
@@ -38,16 +38,7 @@ export default function Header(props: any) {
           </a>
         </Link>
         <div className="m-0 mr-auto p-0 pl-1 my-auto">
-          <h1
-            className={
-              "transition duration-300 ranegillian text-2xl " +
-              (toggleMenu
-                ? "text-foreground"
-                : props.onTop
-                ? "text-dark"
-                : "text-foreground")
-            }
-          >
+          <h1 className="text-2xl">
             <strong>RANE</strong>GILLIAN
           </h1>
         </div>
@@ -55,12 +46,12 @@ export default function Header(props: any) {
 
       <div
         className={
-          "transition duration-300 cursor-pointer lg:hidden focus:outline-none  border border-transparent rounded-md p-1 py-3 relative " +
+          "transition cursor-pointer lg:hidden focus:outline-none  border border-transparent rounded-md p-1 py-3 relative " +
           (toggleMenu
-            ? "text-foreground hover:text-dark hover:border-dark hover:bg-accent-light"
+            ? " hover:text-dark hover:border-dark hover:bg-accent-light"
             : props.onTop
-            ? "text-dark hover:text-foreground hover:border-foreground hover:bg-accent-dark"
-            : "text-foreground hover:text-dark hover:border-dark hover:bg-accent-light")
+            ? " hover:text-foreground hover:border-foreground hover:bg-accent-dark"
+            : " hover:text-dark hover:border-dark hover:bg-accent-light")
         }
         style={{ minHeight: 42, minWidth: 42 }}
         onClick={() => setToggleMenu(!toggleMenu)}
@@ -72,7 +63,7 @@ export default function Header(props: any) {
               <FaCaretUp size={32} />
             </div>
           ) : (
-            <div className="absolute" style={{ top: "4px" }}>
+            <div className="absolute " style={{ top: "4px" }}>
               <FaBars size={32} />
             </div>
           )}
@@ -85,15 +76,20 @@ export default function Header(props: any) {
         transition={{
           duration: 0.3,
           type: "tween",
-          staggerChildren: 0.3,
-          delayChildren: 0.3,
         }}
         id="menu"
       >
         <nav className={toggleMenu ? "visible" : "invisible lg:visible"}>
           <ul className="lg:flex items-center justify-between text-base pt-4 lg:pt-0">
             {pages.map(({ label, id }) => (
-              <li key={id}>
+              <motion.li
+                key={id}
+                animate={{
+                  opacity: props.isLarge ? 1 : toggleMenu ? 1 : 0,
+                  y: props.isLarge ? 0 : toggleMenu ? 0 : -20,
+                }}
+                transition={{ duration: 0.3, type: "tween" }}
+              >
                 <Link href={id} as={id}>
                   <a
                     className={
@@ -109,7 +105,7 @@ export default function Header(props: any) {
                     {label}
                   </a>
                 </Link>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </nav>
