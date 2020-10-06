@@ -4,13 +4,16 @@ import Header from "../components/header";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function LayoutComponent({ children }) {
-  let listener;
+export default function LayoutComponent({ children }: any) {
+  let listener: any;
   const [onTop, setOnTop] = useState(true);
+  const [isLarge, setIsLarge] = useState(
+    global.innerWidth >= 1024 ? true: false
+  );
 
   useEffect(() => {
     listener = document.addEventListener("scroll", (e) => {
-      var scrolled = document.scrollingElement.scrollTop;
+      var scrolled: any = document.scrollingElement?.scrollTop;
       if (scrolled >= 60) {
         setOnTop(false);
       } else {
@@ -18,11 +21,15 @@ export default function LayoutComponent({ children }) {
       }
     });
 
+    global.addEventListener("resize", (e) => {
+      global.innerWidth >= 1024 ? setIsLarge(true): setIsLarge(false)
+    });
+
     return () => {
       document.removeEventListener("scroll", listener);
     };
-  }, [onTop]);
-
+  }, [onTop, isLarge]);
+  
   return (
     <>
       <Head>
@@ -36,7 +43,7 @@ export default function LayoutComponent({ children }) {
           rel="stylesheet"
         ></link>
       </Head>
-      <Header onTop={onTop} />
+      <Header onTop={onTop} isLarge={isLarge} />
       <motion.div
         className="pt-16"
         key="mainContainer"
