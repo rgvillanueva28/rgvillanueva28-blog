@@ -2,7 +2,12 @@ import Head from "next/head";
 import remark from "remark";
 import html from "remark-html";
 import { AnimatePresence, motion } from "framer-motion";
-import Layout from "../../components/layout"
+import Layout from "../../components/layout";
+import { useEffect } from "react";
+
+import Prism from "prismjs";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-python";
 
 export interface postsProps {
   post: Array<any>;
@@ -11,6 +16,13 @@ export interface postsProps {
 
 export default function Home({ post, contentHtml }: postsProps) {
   const dateCreated = new Date(post[0].date);
+
+  useEffect(() => {
+    setTimeout(() => {
+      Prism.highlightAll();
+    }, 0);
+  }, []);
+
   return (
     <AnimatePresence>
       <Layout>
@@ -27,7 +39,7 @@ export default function Home({ post, contentHtml }: postsProps) {
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
-          <main className="container">
+          <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12">
             <h2 className="text-center">{post[0].title}</h2>
             <p>
               {new Intl.DateTimeFormat("en-US", {
@@ -38,21 +50,20 @@ export default function Home({ post, contentHtml }: postsProps) {
             </p>
             <div className="w-full">
               <img
-                src={post[0].coverImage[0].formats.medium.url}
+                src={post[0].coverImage[0].url}
                 alt={post[0].title + "cover"}
-                className="h-full rounded-lg rounded-b-none md:h-48 lg:h-32 xl:h-40 mx-auto"
+                className="object-cover w-full h-40 lg:h-48 xl:h-56 "
               ></img>
             </div>
-            <div className="flex flex-wrap mx-auto w-11/12 md:w-10/12 lg:w-9/12">
+            <div className="flex flex-wrap ">
               <div
-                className="markdown"
+                className="markdown container"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
             </div>
           </main>
         </motion.div>
       </Layout>
-
     </AnimatePresence>
   );
 }
