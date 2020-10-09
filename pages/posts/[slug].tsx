@@ -28,7 +28,7 @@ export default function Home({ post, contentHtml }: postsProps) {
       <Layout>
         <motion.div
           key={post[0].slug}
-          className="container"
+          className="container mb-10"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, type: "spring", stiffness: 300 }}

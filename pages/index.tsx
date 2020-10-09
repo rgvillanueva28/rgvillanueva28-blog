@@ -29,6 +29,7 @@ export default function Home({ posts }: indexProps) {
                 title={post.title}
                 content={post.excerpt}
                 date={post.date}
+                categories={post.categories}
               />
             ))}
             {posts?.map((post) => (
@@ -39,6 +40,7 @@ export default function Home({ posts }: indexProps) {
                 title={post.title}
                 content={post.excerpt}
                 date={post.date}
+                categories={post.categories}
               />
             ))}
           </PostCardDiv>
