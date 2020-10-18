@@ -21,7 +21,7 @@ export default function Home({ posts }: indexProps) {
         
         <Hero />
 
-        <main className="p-16 container">
+        <main className="py-16 container">
           <PostCardDiv>
             {posts?.map((post) => (
               <PostCard

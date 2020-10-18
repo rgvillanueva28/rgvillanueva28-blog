@@ -21,7 +21,7 @@ function PostCard({
 }: postCardProps) {
   const dateCreated = new Date(date);
   return (
-    <div className="flex flex-wrap w-full px-6 py-6 md:w-1/2 lg:w-1/3 ">
+    <div className="flex flex-wrap w-full px-6 py-6 md:w-1/2 lg:w-1/3">
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a>
           <AnimateSharedLayout>
@@ -44,12 +44,12 @@ function PostCard({
                 <img
                   src={image}
                   alt="postCover"
-                  className="object-cover w-full h-full md:h-48 lg:h-32 xl:h-40"
+                  className="object-cover w-full h-full"
                 ></img>
               </div>
               <motion.div layout className="px-4 py-2 text-dark h-full">
                 {categories.map((category: any) => (
-                  <Category text={category.category} />
+                  <Category key={category.category} text={category.category} />
                 ))}
                 <h5 className="font-medium ">{title}</h5>
                 <p className="">{content}</p>
