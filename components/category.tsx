@@ -8,14 +8,14 @@ interface CategoryProps {
 export default function Category({ text, link }: CategoryProps) {
     return (
         text ?
-        <span className="uppercase text-xs rounded-md bg-accent-light px-2 py-1 mr-1">
+        <span className="inline-block uppercase text-xs rounded-md bg-accent-light px-2 py-1 mr-1 mb-2">
             {text}
         </span>
         :
         link ?
         <Link href={`/categories/${link.toLowerCase()}`}>
             <a>
-                <span className="uppercase text-xs rounded-md bg-accent-light px-2 py-1 mr-1">
+                <span className="inline-block uppercase text-xs rounded-md bg-accent-light px-2 py-1 mr-1 mb-2">
                     {link}
                 </span>
             </a>
