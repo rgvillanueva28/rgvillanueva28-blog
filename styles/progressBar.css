@@ -4,7 +4,7 @@
   }
   
   #nprogress .bar {
-    background: #8DA9C4;
+    background: #05386B;
   
     position: fixed;
     z-index: 1031;
@@ -45,8 +45,8 @@
     box-sizing: border-box;
   
     border: solid 2px transparent;
-    border-top-color: #8DA9C4;
-    border-left-color:#8DA9C4;
+    border-top-color: #05386B;
+    border-left-color:#05386B;
     border-radius: 50%;
   
     -webkit-animation: nprogress-spinner 400ms linear infinite;
