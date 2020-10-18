@@ -9,7 +9,7 @@ import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-python";
 
-import HeroPost from "../../components/heroPost"
+import HeroPost from "../../components/heroPost";
 
 export interface postsProps {
   post: Array<any>;
@@ -22,7 +22,7 @@ export default function Home({ post, contentHtml }: postsProps) {
     year: "numeric",
     month: "long",
     day: "2-digit",
-  }).format(dateCreated)
+  }).format(dateCreated);
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,29 +33,33 @@ export default function Home({ post, contentHtml }: postsProps) {
   return (
     <AnimatePresence>
       <Layout>
+        <HeroPost
+          title={post[0].title}
+          date={date}
+          categories={post[0].categories}
+        />
         <motion.div
           key={post[0].slug}
-          className="pt-16 container mb-10"
+          className="container py-5 md:py-10 lg:py-16"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, type: "spring", stiffness: 300 }}
           exit={{ opacity: 0, y: 200 }}
         >
           <Head>
-            <title>RANE GILLIAN | {post[0].title}</title>
+            <title>{post[0].title} - RANE GILLIAN</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
-          <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12">
-            {/* <HeroPost title={post[0].title} date={date} categories={post[0].categories} /> */}
-            <h2 className="text-center">{post[0].title}</h2>
-            <p>
+          <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 xxl:w-7/12">
+            {/* <h2 className="text-center">{post[0].title}</h2> */}
+            {/* <p>
               {new Intl.DateTimeFormat("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "2-digit",
               }).format(dateCreated)}
-            </p>
+            </p> */}
             {/* <div className="w-full my-4">
               <img
                 src={post[0].coverImage[0].url}
@@ -63,7 +67,7 @@ export default function Home({ post, contentHtml }: postsProps) {
                 className="object-cover w-full h-40 lg:h-48 xl:h-56 "
               ></img>
             </div> */}
-            <div className="flex flex-wrap text-justify">
+            <div className="flex flex-wrap text-justify text-dark">
               <div
                 className="markdown container text-lg"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}

@@ -30,18 +30,19 @@ h6 {
 p {
   @apply text-base;
 }
+.markdown {
+  font-size: inherit;
+}
 .markdown a {
   color: theme("colors.accent.dark");
 }
 .markdown p {
-  color: theme("colors.dark");
   font-size: inherit;
 }
 .markdown a:hover {
   color: theme("colors.foreground");
   text-decoration: underline;
 }
-
 .markdown pre code {
   font-size: small
 }

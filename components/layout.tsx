@@ -47,7 +47,7 @@ export default function LayoutComponent({ children }: any) {
       <Header onTop={onTop} isLarge={isLarge} />
       <AnimatePresence>
         <motion.div
-        className="min-h-screen"
+          className="min-h-screen"
           key="mainContainer"
           initial="pageInitial"
           animate="pageAnimate"
@@ -55,11 +55,11 @@ export default function LayoutComponent({ children }: any) {
           variants={{
             pageInitial: {
               opacity: 0,
-              y: -100,
+              // y: -100,
             },
             pageAnimate: {
               opacity: 1,
-              y: 0,
+              // y: 0,
               transition: {
                 duration: 1,
                 delay: 0.25,
@@ -69,7 +69,7 @@ export default function LayoutComponent({ children }: any) {
             },
             pageExit: {
               opacity: 0,
-              y: 100,
+              // y: 100,
             },
           }}
         >
