@@ -4,6 +4,10 @@ const pages = [
     id: "/",
   },
   {
+    label: "Categories",
+    id: "/categories",
+  },
+  {
     label: "About",
     id: "/about",
   },

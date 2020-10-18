@@ -3,6 +3,7 @@ import PostCardDiv from "../components/postCardDiv";
 import PostCard from "../components/postCard";
 import Header from "../components/header";
 import Layout from "../components/layout";
+import Hero from "../components/hero";
 import { motion } from "framer-motion";
 
 export interface indexProps {
@@ -12,14 +13,15 @@ export interface indexProps {
 export default function Home({ posts }: indexProps) {
   return (
     <Layout>
-      <div className="container">
+      <div>
         <Head>
           <title>RANE GILLIAN | BLOG</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+        
+        <Hero />
 
-        <main className="container">
-          <h2 className="text-center text-dark">RANE GILLIAN BLOG</h2>
+        <main className="p-16 container">
           <PostCardDiv>
             {posts?.map((post) => (
               <PostCard

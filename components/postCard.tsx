@@ -36,7 +36,7 @@ function PostCard({
               whileTap={{ scale: 1.02 }}
               transition={{
                 type: "spring",
-                stiffness: 500,
+                stiffness: 200,
                 duration: 0.25,
               }}
             >

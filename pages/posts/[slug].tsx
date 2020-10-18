@@ -28,7 +28,7 @@ export default function Home({ post, contentHtml }: postsProps) {
       <Layout>
         <motion.div
           key={post[0].slug}
-          className="container mb-10"
+          className="pt-16 container mb-10"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, type: "spring", stiffness: 300 }}
@@ -55,7 +55,7 @@ export default function Home({ post, contentHtml }: postsProps) {
                 className="object-cover w-full h-40 lg:h-48 xl:h-56 "
               ></img>
             </div>
-            <div className="flex flex-wrap ">
+            <div className="flex flex-wrap text-justify">
               <div
                 className="markdown container"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}

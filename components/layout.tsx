@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Header from "../components/header";
+import Footer from "../components/footer";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -46,7 +47,6 @@ export default function LayoutComponent({ children }: any) {
       <Header onTop={onTop} isLarge={isLarge} />
       <AnimatePresence>
         <motion.div
-          className="pt-16 container"
           key="mainContainer"
           initial="pageInitial"
           animate="pageAnimate"
@@ -75,6 +75,7 @@ export default function LayoutComponent({ children }: any) {
           {children}
         </motion.div>
       </AnimatePresence>
+      <Footer />
     </>
   );
 }
