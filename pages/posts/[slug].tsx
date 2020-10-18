@@ -48,7 +48,7 @@ export default function Home({ post, contentHtml }: postsProps) {
                 day: "2-digit",
               }).format(dateCreated)}
             </p>
-            <div className="w-full">
+            <div className="w-full my-4">
               <img
                 src={post[0].coverImage[0].url}
                 alt={post[0].title + "cover"}
@@ -57,7 +57,7 @@ export default function Home({ post, contentHtml }: postsProps) {
             </div>
             <div className="flex flex-wrap text-justify">
               <div
-                className="markdown container"
+                className="markdown container text-lg"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
             </div>

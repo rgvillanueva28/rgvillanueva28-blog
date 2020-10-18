@@ -35,10 +35,15 @@ p {
 }
 .markdown p {
   color: theme("colors.dark");
+  font-size: inherit;
 }
 .markdown a:hover {
   color: theme("colors.foreground");
   text-decoration: underline;
+}
+
+.markdown pre code {
+  font-size: small
 }
 
 @import 'tailwindcss/components';
