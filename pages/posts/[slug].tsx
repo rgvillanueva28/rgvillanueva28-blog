@@ -9,6 +9,8 @@ import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-python";
 
+import HeroPost from "../../components/heroPost"
+
 export interface postsProps {
   post: Array<any>;
   contentHtml: string;
@@ -16,6 +18,11 @@ export interface postsProps {
 
 export default function Home({ post, contentHtml }: postsProps) {
   const dateCreated = new Date(post[0].date);
+  const date = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  }).format(dateCreated)
 
   useEffect(() => {
     setTimeout(() => {
@@ -40,6 +47,7 @@ export default function Home({ post, contentHtml }: postsProps) {
           </Head>
 
           <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12">
+            {/* <HeroPost title={post[0].title} date={date} categories={post[0].categories} /> */}
             <h2 className="text-center">{post[0].title}</h2>
             <p>
               {new Intl.DateTimeFormat("en-US", {
