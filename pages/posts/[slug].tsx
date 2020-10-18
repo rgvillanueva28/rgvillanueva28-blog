@@ -48,13 +48,13 @@ export default function Home({ post, contentHtml }: postsProps) {
                 day: "2-digit",
               }).format(dateCreated)}
             </p>
-            <div className="w-full my-4">
+            {/* <div className="w-full my-4">
               <img
                 src={post[0].coverImage[0].url}
                 alt={post[0].title + "cover"}
                 className="object-cover w-full h-40 lg:h-48 xl:h-56 "
               ></img>
-            </div>
+            </div> */}
             <div className="flex flex-wrap text-justify">
               <div
                 className="markdown container text-lg"

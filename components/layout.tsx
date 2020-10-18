@@ -47,6 +47,7 @@ export default function LayoutComponent({ children }: any) {
       <Header onTop={onTop} isLarge={isLarge} />
       <AnimatePresence>
         <motion.div
+        className="min-h-screen"
           key="mainContainer"
           initial="pageInitial"
           animate="pageAnimate"
