@@ -16,13 +16,13 @@ export default function Header(props: any) {
         "fixed w-full lg:px-16 px-6 lg:py-0 py-2 flex flex-wrap items-center transition duration-500 z-50  " +
         (props.isLarge
           ? props.onTop
-            ? "bg-transparent text-dark"
-            : "bg-accent-dark text-foreground"
+            ? "bg-transparent text-accent-light"
+            : "bg-dark text-foreground"
           : toggleMenu
-          ? "bg-accent-dark text-foreground"
+          ? "bg-dark text-foreground"
           : props.onTop
-          ? "bg-transparent text-dark"
-          : "bg-accent-dark text-foreground")
+          ? "bg-transparent text-accent-light"
+          : "bg-dark text-foreground")
       }
     >
       <div className="flex-1 flex justify-between items-center">
@@ -47,11 +47,7 @@ export default function Header(props: any) {
       <div
         className={
           "transition cursor-pointer lg:hidden focus:outline-none  border border-transparent rounded-md p-1 py-3 relative " +
-          (toggleMenu
-            ? " hover:text-dark hover:border-dark hover:bg-accent-light"
-            : props.onTop
-            ? " hover:text-foreground hover:border-foreground hover:bg-accent-dark"
-            : " hover:text-dark hover:border-dark hover:bg-accent-light")
+          " hover:text-dark hover:border-accent-dark hover:bg-accent-light"
         }
         style={{ minHeight: 42, minWidth: 42 }}
         onClick={() => setToggleMenu(!toggleMenu)}
@@ -94,11 +90,15 @@ export default function Header(props: any) {
                   <a
                     className={
                       "lg:py-4 py-3 px-5 block border-b-2 border-transparent " +
-                      (toggleMenu
-                        ? "text-foreground hover:text-dark hover:border-dark hover:bg-accent-light"
+                      (props.isLarge
+                        ? props.onTop
+                          ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
+                          : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
+                        : toggleMenu
+                        ? "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
                         : props.onTop
-                        ? "text-dark hover:text-foreground hover:border-foreground hover:bg-accent-dark"
-                        : "text-foreground hover:text-dark hover:border-dark hover:bg-accent-light")
+                        ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
+                        : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light")
                     }
                     onClick={() => setToggleMenu(false)}
                   >
