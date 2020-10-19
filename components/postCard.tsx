@@ -27,7 +27,7 @@ function PostCard({
           <AnimateSharedLayout>
             <motion.div
               layout
-              className="flex flex-col items-stretch min-h-full pb-2 bg-foreground shadow-md overflow-hidden"
+              className="flex flex-col items-stretch min-h-full pb-2 bg-white shadow-lg overflow-hidden"
               initial={{ borderRadius: 10 }}
               whileHover={{
                 scale: 1.05,
