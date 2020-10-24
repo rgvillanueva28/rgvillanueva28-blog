@@ -5,7 +5,7 @@ import Footer from "../components/footer";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function LayoutComponent({ children }: any) {
+export default function LayoutComponent(props: any) {
   let listener: any;
   const [onTop, setOnTop] = useState(true);
   const [isLarge, setIsLarge] = useState(
@@ -44,7 +44,7 @@ export default function LayoutComponent({ children }: any) {
           rel="stylesheet"
         ></link>
       </Head>
-      <Header onTop={onTop} isLarge={isLarge} />
+      <Header onTop={onTop} isLarge={isLarge} categories={props.categories}/>
       <AnimatePresence>
         <motion.div
           className="min-h-screen"
@@ -73,7 +73,7 @@ export default function LayoutComponent({ children }: any) {
             },
           }}
         >
-          {children}
+          {props.children}
         </motion.div>
       </AnimatePresence>
       <Footer />

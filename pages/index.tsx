@@ -8,11 +8,13 @@ import { motion } from "framer-motion";
 
 export interface indexProps {
   posts: Array<any> | undefined;
+  categories: Array<any> | undefined;
 }
 
-export default function Home({ posts }: indexProps) {
+export default function Home({ posts, categories }: indexProps) {
+
   return (
-    <Layout>
+    <Layout categories={categories}>
       <div>
         <Head>
           <title>RANE GILLIAN | BLOG</title>
@@ -56,10 +58,15 @@ export async function getStaticProps() {
   const response = await fetch(
     "https://rgvillanueva28-strapi.herokuapp.com/posts?_sort=date:DESC"
   );
+  const response2 = await fetch(
+    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
+  )
   const posts: Array<any> | undefined = await response.json();
+  const categories: Array<any> | undefined = await response2.json();
   return {
     props: {
       posts,
+      categories
     },
   };
 }

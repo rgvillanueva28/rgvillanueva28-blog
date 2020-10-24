@@ -11,16 +11,6 @@ export default function Header(props: any) {
   const { scrollYProgress } = useViewportScroll();
   const [toggleCategories, setToggleCategories] = useState(false);
 
-  const cats = [
-    "python",
-    "asdddd",
-    "life",
-    "tech",
-    "javascript",
-    "react",
-    "next js",
-  ];
-
   return (
     <motion.header
       id="header"
@@ -111,7 +101,7 @@ export default function Header(props: any) {
                       ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
                       : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light")
                   }
-                  onClick={() => setToggleCategories(true)}
+                  onClick={() => setToggleMenu(false)}
                 >
                   Home
                 </a>
@@ -148,7 +138,7 @@ export default function Header(props: any) {
             </motion.li>
 
             {/* Dropdown */}
-            <HeaderSidebar categories={cats} shown={toggleCategories} setToggleCategories={setToggleCategories}/>
+            <HeaderSidebar categories={props.categories} shown={toggleCategories} setToggleCategories={setToggleCategories}/>
 
             <motion.li
               key="about"

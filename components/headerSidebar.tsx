@@ -6,7 +6,7 @@ export default function headerSidebar({
   shown,
   setToggleCategories,
 }: any) {
-  console.log(shown);
+  const cats = categories.map((cat: any) => cat.category);
   return (
     <>
       <div
@@ -35,7 +35,7 @@ export default function headerSidebar({
               <FaAngleRight className="ml-auto h-6" />
             </div>
           </li>
-          {categories.map((category: string) => (
+          {cats.map((category: string) => (
             <li key={category}>
               <Link
                 href={`/categories/${category}`}
