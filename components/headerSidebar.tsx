@@ -32,14 +32,16 @@ export default function headerSidebar({
               className="flex py-2 px-4 hover:text-dark hover:bg-accent-light cursor-pointer text-accent-light "
               onClick={() => setToggleCategories(!shown)}
             >
-              <FaAngleRight className="ml-auto h-6" />
+              <span className="flex ml-auto h-6" >
+                <b>CLOSE</b> &nbsp; <FaAngleRight size={25} />
+              </span>
             </div>
           </li>
           {cats.map((category: string) => (
             <li key={category}>
               <Link
                 href={`/categories/${category}`}
-                as={`/categories/${category}`}
+                as={`/categories/${category.toLowerCase()}`}
               >
                 <a className="flex py-2 px-4 hover:text-dark hover:bg-accent-light text-accent-light ">
                   {category}
