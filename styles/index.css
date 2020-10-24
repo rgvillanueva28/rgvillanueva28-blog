@@ -40,11 +40,14 @@ p {
   font-size: inherit;
 }
 .markdown a:hover {
-  color: theme("colors.foreground");
+  color: theme("colors.accent.mid");
   text-decoration: underline;
 }
 .markdown pre code {
-  font-size: small
+  font-size: small;
+}
+.markdown h1, h2, h3, h4, h5, h6{
+  text-align: left;
 }
 
 @import 'tailwindcss/components';

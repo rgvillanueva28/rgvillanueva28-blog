@@ -2,12 +2,24 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, useViewportScroll } from "framer-motion";
 
-import { FaBars, FaCaretUp } from "react-icons/fa";
+import { FaBars, FaCaretUp, FaCaretDown } from "react-icons/fa";
 import pages from "./headerPages";
+import HeaderSidebar from "./headerSidebar";
 
 export default function Header(props: any) {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { scrollYProgress } = useViewportScroll();
+  const [toggleCategories, setToggleCategories] = useState(false);
+
+  const cats = [
+    "python",
+    "asdddd",
+    "life",
+    "tech",
+    "javascript",
+    "react",
+    "next js",
+  ];
 
   return (
     <motion.header
@@ -77,36 +89,95 @@ export default function Header(props: any) {
       >
         <nav className={toggleMenu ? "visible" : "invisible lg:visible"}>
           <ul className="lg:flex items-center justify-between text-base pt-4 lg:pt-0">
-            {pages.map(({ label, id }) => (
-              <motion.li
-                key={id}
-                animate={{
-                  opacity: props.isLarge ? 1 : toggleMenu ? 1 : 0,
-                  y: props.isLarge ? 0 : toggleMenu ? 0 : -20,
-                }}
-                transition={{ duration: 0.3, type: "tween" }}
-              >
-                <Link href={id} as={id}>
-                  <a
-                    className={
-                      "lg:py-4 py-3 px-5 block border-b-2 border-transparent " +
-                      (props.isLarge
-                        ? props.onTop
-                          ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
-                          : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
-                        : toggleMenu
-                        ? "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
-                        : props.onTop
+            <motion.li
+              key="home"
+              animate={{
+                opacity: props.isLarge ? 1 : toggleMenu ? 1 : 0,
+                y: props.isLarge ? 0 : toggleMenu ? 0 : -20,
+              }}
+              transition={{ duration: 0.3, type: "tween" }}
+            >
+              <Link href="/" as="/">
+                <a
+                  className={
+                    "lg:py-4 py-3 px-5 block border-b-2 border-transparent " +
+                    (props.isLarge
+                      ? props.onTop
                         ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
-                        : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light")
-                    }
-                    onClick={() => setToggleMenu(false)}
-                  >
-                    {label}
-                  </a>
-                </Link>
-              </motion.li>
-            ))}
+                        : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
+                      : toggleMenu
+                      ? "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
+                      : props.onTop
+                      ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
+                      : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light")
+                  }
+                  onClick={() => setToggleCategories(true)}
+                >
+                  Home
+                </a>
+              </Link>
+            </motion.li>
+
+            <motion.li
+              className="cursor-pointer"
+              key="categories"
+              animate={{
+                opacity: props.isLarge ? 1 : toggleMenu ? 1 : 0,
+                y: props.isLarge ? 0 : toggleMenu ? 0 : -20,
+              }}
+              transition={{ duration: 0.3, type: "tween" }}
+            >
+              <a
+                className={
+                  "lg:py-4 py-3 px-5 flex border-b-2 border-transparent  " +
+                  (props.isLarge
+                    ? props.onTop
+                      ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
+                      : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
+                    : toggleMenu
+                    ? "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
+                    : props.onTop
+                    ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
+                    : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light")
+                }
+                onClick={() => setToggleCategories(!toggleCategories)}
+              >
+                Categories&nbsp;
+                <FaCaretDown className="mt-1" />
+              </a>
+            </motion.li>
+
+            {/* Dropdown */}
+            <HeaderSidebar categories={cats} shown={toggleCategories} setToggleCategories={setToggleCategories}/>
+
+            <motion.li
+              key="about"
+              animate={{
+                opacity: props.isLarge ? 1 : toggleMenu ? 1 : 0,
+                y: props.isLarge ? 0 : toggleMenu ? 0 : -20,
+              }}
+              transition={{ duration: 0.3, type: "tween" }}
+            >
+              <Link href="/about" as="/about">
+                <a
+                  className={
+                    "lg:py-4 py-3 px-5 block border-b-2 border-transparent " +
+                    (props.isLarge
+                      ? props.onTop
+                        ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
+                        : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
+                      : toggleMenu
+                      ? "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light"
+                      : props.onTop
+                      ? "text-accent-light hover:text-dark hover:border-dark hover:bg-accent-light"
+                      : "text-foreground hover:text-dark hover:border-accent-dark hover:bg-accent-light")
+                  }
+                  onClick={() => setToggleMenu(false)}
+                >
+                  About
+                </a>
+              </Link>
+            </motion.li>
           </ul>
         </nav>
       </motion.div>
