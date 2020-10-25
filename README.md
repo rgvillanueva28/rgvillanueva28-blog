@@ -6,9 +6,7 @@ My personal blog
 - Fix homepage layout ✅
 - Fix post page layout ✅
 - Fix card ✅
-- Fix header
-    - Add Categories dropdown menu on hover (large screen)
-    - Add Categories dropdown menu on click
+- Fix header ✅
 - Fix footer
     - Add details
 - Add Home pagination
