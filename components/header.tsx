@@ -138,7 +138,7 @@ export default function Header(props: any) {
             </motion.li>
 
             {/* Dropdown */}
-            <HeaderSidebar categories={props.categories} shown={toggleCategories} setToggleCategories={setToggleCategories}/>
+            <HeaderSidebar categories={props.categories} shown={toggleCategories} setToggleCategories={setToggleCategories} setToggleMenu={setToggleMenu}/>
 
             <motion.li
               key="about"

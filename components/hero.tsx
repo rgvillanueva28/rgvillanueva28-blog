@@ -1,11 +1,15 @@
-export default function Hero() {
+interface HeroProps {
+  title: string;
+  content: any;
+}
+
+export default function Hero({title, content}: HeroProps) {
   return (
     <div className="bg-gradient-to-b from-accent-dark to-dark">
       <div className="text-center py-16 mx-5">
-        <h1 className=" text-accent-light text-3xl md:text-4xl">BLOG HOMEPAGE</h1>
+        <h1 className=" text-accent-light text-3xl md:text-4xl">{title}</h1>
         <p className=" text-accent-mid">
-          A collection of blog posts crafted from the themes of technology,
-          programming, and personal experiences.
+          {content}
         </p>
       </div>
     </div>

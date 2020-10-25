@@ -14,9 +14,10 @@ import HeroPost from "../../components/heroPost";
 export interface postsProps {
   post: Array<any>;
   contentHtml: string;
+  categories: Array<any>;
 }
 
-export default function Home({ post, contentHtml }: postsProps) {
+export default function Posts({ post, contentHtml, categories }: postsProps) {
   const dateCreated = new Date(post[0].date);
   const date = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -32,7 +33,7 @@ export default function Home({ post, contentHtml }: postsProps) {
 
   return (
     <AnimatePresence>
-      <Layout>
+      <Layout categories={categories}>
         <HeroPost
           title={post[0].title}
           date={date}
@@ -95,9 +96,17 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
+
   const res = await fetch(
     `https://rgvillanueva28-strapi.herokuapp.com/posts?slug_eq=${params.slug}`
   );
+  const response2 = await fetch(
+    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
+  )
+  
+  const cats: Array<any> | undefined = await response2.json();
+  const categories = cats?.map((cat) => (cat.category))
+
   const post = await res.json();
   const content = await remark().use(html).process(post[0].content);
   const contentHtml = await content
@@ -108,6 +117,7 @@ export async function getStaticProps({ params }: any) {
     props: {
       post,
       contentHtml,
+      categories
     },
   };
 }

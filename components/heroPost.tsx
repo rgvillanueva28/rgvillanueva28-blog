@@ -13,7 +13,7 @@ export default function HeroPost({ title, date, categories }: HeroPostProps) {
         <h1 className=" text-accent-light text-3xl md:text-4xl">{title}</h1>
         <p className="text-accent-dark mb-5">{date}</p>
         {categories.map((category) => (
-          <Category link={category.category} />
+          <Category link={category.category} key={category.category}/>
         ))}
       </div>
     </div>

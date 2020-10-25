@@ -21,7 +21,8 @@ export default function Home({ posts, categories }: indexProps) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         
-        <Hero />
+        <Hero title="BLOG HOMEPAGE" content="A collection of blog posts crafted from the themes of technology,
+          programming, and personal experiences."/>
 
         <main className="py-16 container">
           <PostCardDiv>
@@ -62,7 +63,8 @@ export async function getStaticProps() {
     "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
   )
   const posts: Array<any> | undefined = await response.json();
-  const categories: Array<any> | undefined = await response2.json();
+  const cats: Array<any> | undefined = await response2.json();
+  const categories = cats?.map((cat) => (cat.category))
   return {
     props: {
       posts,

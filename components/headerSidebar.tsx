@@ -5,8 +5,8 @@ export default function headerSidebar({
   categories,
   shown,
   setToggleCategories,
+  setToggleMenu,
 }: any) {
-  const cats = categories.map((cat: any) => cat.category);
   return (
     <>
       <div
@@ -32,13 +32,19 @@ export default function headerSidebar({
               className="flex py-2 px-4 hover:text-dark hover:bg-accent-light cursor-pointer text-accent-light "
               onClick={() => setToggleCategories(!shown)}
             >
-              <span className="flex ml-auto h-6" >
+              <span className="flex ml-auto h-6">
                 <b>CLOSE</b> &nbsp; <FaAngleRight size={25} />
               </span>
             </div>
           </li>
-          {cats.map((category: string) => (
-            <li key={category}>
+          {categories.map((category: string) => (
+            <li
+              key={category}
+              onClick={() => {
+                setToggleCategories(false);
+                setToggleMenu(false);
+              }}
+            >
               <Link
                 href={`/categories/${category}`}
                 as={`/categories/${category.toLowerCase()}`}
