@@ -26,7 +26,7 @@ function useHighlightAll() {
 function MyApp({ Component, pageProps }: AppProps) {
   const newPageProps = { ...pageProps, useHighlightAll }
 
-  return <Component {...newPageProps} />;
+  return <Component { ...newPageProps } />;
 }
 
 export default MyApp;

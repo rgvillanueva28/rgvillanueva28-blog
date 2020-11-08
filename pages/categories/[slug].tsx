@@ -4,6 +4,9 @@ import html from "remark-html";
 import { AnimatePresence, motion } from "framer-motion";
 import Layout from "../../components/layout";
 import { useEffect } from "react";
+import { GetStaticProps, GetStaticPaths } from "next";
+import { useRouter } from "next/router";
+import DefaultErrorPage from "next/error";
 
 import HeroPost from "../../components/heroPost";
 import Hero from "../../components/hero";
@@ -13,8 +16,7 @@ import Category from "../../components/category";
 
 export interface categoriesProps {
   posts: Array<any> | undefined;
-
-  categories: Array<any>;
+  categories: Array<any> | undefined;
   query: string;
 }
 
@@ -23,6 +25,23 @@ export default function Categories({
   categories,
   query,
 }: categoriesProps) {
+  const router = useRouter();
+  const fallbackQuery: any = router.query.slug?.toString().toUpperCase();
+
+  if (router.isFallback) {
+    return (
+      <AnimatePresence>
+        <Layout categories={categories}>
+          <Hero title="Loading" content={".........."} />
+        </Layout>
+      </AnimatePresence>
+    );
+  }
+
+  if (!categories?.includes(fallbackQuery)) {
+    return <DefaultErrorPage statusCode={404} />
+  }
+
   return (
     <AnimatePresence>
       <Layout categories={categories}>
@@ -55,7 +74,7 @@ export default function Categories({
   );
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(
     "https://rgvillanueva28-strapi.herokuapp.com/categories/"
   );
@@ -69,9 +88,9 @@ export async function getStaticPaths() {
     paths,
     fallback: true,
   };
-}
+};
 
-export async function getStaticProps({ params }: any) {
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const query = params.slug;
 
   let getPosts;
@@ -98,4 +117,4 @@ export async function getStaticProps({ params }: any) {
     },
     revalidate: 60,
   };
-}
+};

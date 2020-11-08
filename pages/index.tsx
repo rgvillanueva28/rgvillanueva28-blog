@@ -5,6 +5,7 @@ import Header from "../components/header";
 import Layout from "../components/layout";
 import Hero from "../components/hero";
 import { motion } from "framer-motion";
+import { GetStaticProps, GetStaticPaths  } from 'next'
 
 export interface indexProps {
   posts: Array<any> | undefined;
@@ -46,7 +47,7 @@ export default function Home({ posts, categories }: indexProps) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   let getPosts;
   process.env.DEV
     ? (getPosts = await fetch(

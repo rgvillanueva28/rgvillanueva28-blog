@@ -18,9 +18,7 @@ export default function headerSidebar({
         onClick={() => setToggleCategories(!shown)}
       ></div>
       <nav
-        className={
-          "transition-all duration-300 ease-in-out h-full bg-dark shadow-lg fixed top-0 right-0 w-64 max-w-xl "
-        }
+        className="transition-all duration-300 ease-in-out h-full bg-dark shadow-lg fixed top-0 right-0 w-64 max-w-xl "
         style={{
           transform: shown ? "translateX(0)" : "translateX(100%)",
           zIndex: 200,
@@ -37,7 +35,7 @@ export default function headerSidebar({
               </span>
             </div>
           </li>
-          {categories.map((category: string) => (
+          {categories?.map((category: string) => (
             <li
               key={category}
               onClick={() => {

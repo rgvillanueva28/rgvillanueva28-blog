@@ -4,13 +4,17 @@ import html from "remark-html";
 import { AnimatePresence, motion } from "framer-motion";
 import Layout from "../../components/layout";
 import { useEffect } from "react";
+import { GetStaticProps, GetStaticPaths } from "next";
+import { useRouter } from "next/router";
+import DefaultErrorPage from "next/error";
+import Hero from "../../components/hero";
 
 import HeroPost from "../../components/heroPost";
 
 export interface postsProps {
   post: Array<any>;
   contentHtml: string;
-  categories: Array<any>;
+  categories: Array<any> | undefined;
   useHighlightAll: any;
 }
 
@@ -20,7 +24,24 @@ export default function Posts({
   categories,
   useHighlightAll,
 }: postsProps) {
+  const router = useRouter();
+  const fallbackQuery: any = router.query.slug?.toString().toUpperCase();
+
   useHighlightAll();
+
+  if (router.isFallback) {
+    return (
+      <AnimatePresence>
+        <Layout categories={categories}>
+          <Hero title="Loading" content={".........."} />
+        </Layout>
+      </AnimatePresence>
+    );
+  }
+
+  if (!post || contentHtml === "error") {
+    return <DefaultErrorPage statusCode={404} />;
+  }
 
   const dateCreated = new Date(post[0].date);
   const date = new Intl.DateTimeFormat("en-US", {
@@ -70,7 +91,7 @@ export default function Posts({
   );
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   let getPaths;
   process.env.DEV
     ? (getPaths = await fetch(
@@ -88,10 +109,12 @@ export async function getStaticPaths() {
     })),
     fallback: true,
   };
-}
+};
 
-export async function getStaticProps({ params }: any) {
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   let getPostContent;
+  let content;
+  let contentHtml = "error";
   process.env.DEV
     ? (getPostContent = await fetch(
         `https://rgvillanueva28-strapi.herokuapp.com/posts?slug_eq=${params.slug}`
@@ -101,16 +124,19 @@ export async function getStaticProps({ params }: any) {
       ));
 
   const post = await getPostContent.json();
-  const content = await remark().use(html).process(post[0].content);
-  const contentHtml = await content
-    .toString()
-    .replace(/a\shref/g, 'a target="_blank" href');
 
-    const getCats = await fetch(
-      "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
-    );
-    let cats: Array<any> | undefined = await getCats.json();
-    let categories = cats?.map((cat) => cat.category.toUpperCase());
+  if (post.length > 0) {
+    content = await remark().use(html).process(post[0].content);
+    contentHtml = content
+      .toString()
+      .replace(/a\shref/g, 'a target="_blank" href');
+  }
+
+  const getCats = await fetch(
+    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
+  );
+  let cats: Array<any> | undefined = await getCats.json();
+  let categories = cats?.map((cat) => cat.category.toUpperCase());
 
   return {
     props: {
@@ -120,4 +146,4 @@ export async function getStaticProps({ params }: any) {
     },
     revalidate: 60,
   };
-}
+};
