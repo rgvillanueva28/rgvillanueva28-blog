@@ -14,9 +14,14 @@ export interface postsProps {
   useHighlightAll: any;
 }
 
-export default function Posts({ post, contentHtml, categories, useHighlightAll }: postsProps) {
-  useHighlightAll()
-  
+export default function Posts({
+  post,
+  contentHtml,
+  categories,
+  useHighlightAll,
+}: postsProps) {
+  useHighlightAll();
+
   const dateCreated = new Date(post[0].date);
   const date = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -46,21 +51,6 @@ export default function Posts({ post, contentHtml, categories, useHighlightAll }
           </Head>
 
           <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 xxl:w-7/12">
-            {/* <h2 className="text-center">{post[0].title}</h2> */}
-            {/* <p>
-              {new Intl.DateTimeFormat("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-              }).format(dateCreated)}
-            </p> */}
-            {/* <div className="w-full my-4">
-              <img
-                src={post[0].coverImage[0].url}
-                alt={post[0].title + "cover"}
-                className="object-cover w-full h-40 lg:h-48 xl:h-56 "
-              ></img>
-            </div> */}
             <img
               src={post[0].coverImage[0].url}
               alt={post[0].title + "cover image"}
@@ -81,8 +71,15 @@ export default function Posts({ post, contentHtml, categories, useHighlightAll }
 }
 
 export async function getStaticPaths() {
-  const res = await fetch("https://rgvillanueva28-strapi.herokuapp.com/posts/");
-  const posts = await res.json();
+  let getPaths;
+  process.env.DEV
+    ? (getPaths = await fetch(
+        "https://rgvillanueva28-strapi.herokuapp.com/posts"
+      ))
+    : (getPaths = await fetch(
+        "https://rgvillanueva28-strapi.herokuapp.com/posts?status_eq=published"
+      ));
+  const posts = await getPaths.json();
   return {
     paths: posts.map((post: any) => ({
       params: {
@@ -109,11 +106,11 @@ export async function getStaticProps({ params }: any) {
     .toString()
     .replace(/a\shref/g, 'a target="_blank" href');
 
-  const getCats = await fetch(
-    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
-  );
-  const cats: Array<any> | undefined = await getCats.json();
-  const categories = cats?.map((cat) => cat.category);
+    const getCats = await fetch(
+      "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
+    );
+    let cats: Array<any> | undefined = await getCats.json();
+    let categories = cats?.map((cat) => cat.category.toUpperCase());
 
   return {
     props: {

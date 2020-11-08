@@ -39,17 +39,6 @@ export default function Home({ posts, categories }: indexProps) {
                 categories={post.categories}
               />
             ))}
-            {/* {posts?.map((post) => (
-              <PostCard
-                key={post.slug}
-                slug={post.slug}
-                image={post.coverImage[0].url}
-                title={post.title}
-                content={post.excerpt}
-                date={post.date}
-                categories={post.categories}
-              />
-            ))} */}
           </PostCardDiv>
         </main>
       </div>
@@ -66,13 +55,13 @@ export async function getStaticProps() {
     : (getPosts = await fetch(
         "https://rgvillanueva28-strapi.herokuapp.com/posts?status_eq=published&_sort=date:DESC"
       ));
+  let posts: Array<any> | undefined = await getPosts.json();
 
   const getCats = await fetch(
     "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
   );
-  let posts: Array<any> | undefined = await getPosts.json();
   let cats: Array<any> | undefined = await getCats.json();
-  let categories = cats?.map((cat) => cat.category);
+  let categories = cats?.map((cat) => cat.category.toUpperCase());
 
   return {
     props: {

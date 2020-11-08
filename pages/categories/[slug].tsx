@@ -9,18 +9,20 @@ import HeroPost from "../../components/heroPost";
 import Hero from "../../components/hero";
 import PostCard from "../../components/postCard";
 import PostCardDiv from "../../components/postCardDiv";
-import Category from "../../components/category"
+import Category from "../../components/category";
 
 export interface categoriesProps {
   posts: Array<any> | undefined;
 
-  cats: Array<any>;
+  categories: Array<any>;
   query: string;
 }
 
-export default function Categories({ posts, cats, query }: categoriesProps) {
-  const categories = cats.map((cat) => cat.category);
-
+export default function Categories({
+  posts,
+  categories,
+  query,
+}: categoriesProps) {
   return (
     <AnimatePresence>
       <Layout categories={categories}>
@@ -30,21 +32,10 @@ export default function Categories({ posts, cats, query }: categoriesProps) {
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
-          <Hero title="CATEGORY" content={<Category text={query} />}/>
+          <Hero title="CATEGORY" content={<Category text={query} />} />
 
           <main className="py-16 container">
             <PostCardDiv>
-              {posts?.map((post: any) => (
-                <PostCard
-                  key={post.slug}
-                  slug={post.slug}
-                  image={post.coverImage[0].url}
-                  title={post.title}
-                  content={post.excerpt}
-                  date={post.date}
-                  categories={post.categories}
-                />
-              ))}
               {posts?.map((post: any) => (
                 <PostCard
                   key={post.slug}
@@ -76,26 +67,35 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
 export async function getStaticProps({ params }: any) {
-    const query = params.slug[0].toUpperCase() + params.slug.substring(1);
-  const response = await fetch(
-    `https://rgvillanueva28-strapi.herokuapp.com/posts?categories.category_in=${query}&_sort=date:DESC`
+  const query = params.slug;
+
+  let getPosts;
+  process.env.DEV
+    ? (getPosts = await fetch(
+        `https://rgvillanueva28-strapi.herokuapp.com/posts?categories.category_in=${query}&_sort=date:DESC`
+      ))
+    : (getPosts = await fetch(
+        `https://rgvillanueva28-strapi.herokuapp.com/posts?status_eq=published&categories.category_in=${query}&_sort=date:DESC`
+      ));
+  const posts: Array<any> | undefined = await getPosts.json();
+
+  const getCats = await fetch(
+    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
   );
-  const response2 = await fetch(
-    `https://rgvillanueva28-strapi.herokuapp.com/categories/`
-  );
-  const cats: Array<any> | undefined = await response2.json();
-  const posts: Array<any> | undefined = await response.json();
+  let cats: Array<any> | undefined = await getCats.json();
+  let categories = cats?.map((cat) => cat.category.toUpperCase());
 
   return {
     props: {
       posts,
-      cats,
+      categories,
       query,
     },
+    revalidate: 60,
   };
 }
