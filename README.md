@@ -10,3 +10,6 @@ My personal blog
 - Fix footer
     - Add details
 - Add Home pagination
+
+### .env.local
+Create a file .env.local and enter DEV=true or any value on the DEV.
