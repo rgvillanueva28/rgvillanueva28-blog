@@ -11,21 +11,18 @@ export interface postsProps {
   post: Array<any>;
   contentHtml: string;
   categories: Array<any>;
+  useHighlightAll: any;
 }
 
-export default function Posts({ post, contentHtml, categories }: postsProps) {
+export default function Posts({ post, contentHtml, categories, useHighlightAll }: postsProps) {
+  useHighlightAll()
+  
   const dateCreated = new Date(post[0].date);
   const date = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
     day: "2-digit",
   }).format(dateCreated);
-
-  useEffect(() => {
-    setTimeout(() => {
-      Prism.highlightAll();
-    }, 0);
-  }, []);
 
   return (
     <AnimatePresence>
