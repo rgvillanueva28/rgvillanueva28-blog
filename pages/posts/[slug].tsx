@@ -65,11 +65,11 @@ export default function Posts({ post, contentHtml, categories }: postsProps) {
               ></img>
             </div> */}
             <img
-                src={post[0].coverImage[0].url}
-                alt={post[0].title + "cover image"}
-                className="object-fit mx-auto mb-10"
-                style={{maxHeight: 300}}
-              />
+              src={post[0].coverImage[0].url}
+              alt={post[0].title + "cover image"}
+              className="object-fit mx-auto mb-10"
+              style={{ maxHeight: 300 }}
+            />
             <div className="flex flex-wrap text-justify text-dark">
               <div
                 className="markdown container text-lg"
@@ -92,34 +92,38 @@ export async function getStaticPaths() {
         slug: post.slug,
       },
     })),
-
-    fallback: false,
+    fallback: true,
   };
 }
 
 export async function getStaticProps({ params }: any) {
+  let getPostContent;
+  process.env.DEV
+    ? (getPostContent = await fetch(
+        `https://rgvillanueva28-strapi.herokuapp.com/posts?slug_eq=${params.slug}`
+      ))
+    : (getPostContent = await fetch(
+        `https://rgvillanueva28-strapi.herokuapp.com/posts?status_eq=published&slug_eq=${params.slug}`
+      ));
 
-  const res = await fetch(
-    `https://rgvillanueva28-strapi.herokuapp.com/posts?slug_eq=${params.slug}`
-  );
-  const response2 = await fetch(
-    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
-  )
-  
-  const cats: Array<any> | undefined = await response2.json();
-  const categories = cats?.map((cat) => (cat.category))
-
-  const post = await res.json();
+  const post = await getPostContent.json();
   const content = await remark().use(html).process(post[0].content);
   const contentHtml = await content
     .toString()
     .replace(/a\shref/g, 'a target="_blank" href');
 
+  const getCats = await fetch(
+    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
+  );
+  const cats: Array<any> | undefined = await getCats.json();
+  const categories = cats?.map((cat) => cat.category);
+
   return {
     props: {
       post,
       contentHtml,
-      categories
+      categories,
     },
+    revalidate: 60,
   };
 }
