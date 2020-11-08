@@ -37,7 +37,7 @@ export default function Home({ posts, categories }: indexProps) {
                 categories={post.categories}
               />
             ))}
-            {posts?.map((post) => (
+            {/* {posts?.map((post) => (
               <PostCard
                 key={post.slug}
                 slug={post.slug}
@@ -47,7 +47,7 @@ export default function Home({ posts, categories }: indexProps) {
                 date={post.date}
                 categories={post.categories}
               />
-            ))}
+            ))} */}
           </PostCardDiv>
         </main>
       </div>
@@ -70,5 +70,6 @@ export async function getStaticProps() {
       posts,
       categories
     },
+    revalidate: 60,
   };
 }

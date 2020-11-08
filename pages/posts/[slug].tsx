@@ -5,10 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import Layout from "../../components/layout";
 import { useEffect } from "react";
 
-import Prism from "prismjs";
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-python";
-
 import HeroPost from "../../components/heroPost";
 
 export interface postsProps {

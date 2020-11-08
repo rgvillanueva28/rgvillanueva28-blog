@@ -1,6 +1,7 @@
 import "../styles/index.css";
 import "../styles/progressBar.css";
-import "prismjs/themes/prism-okaidia.css";
+
+import "prismjs";
 
 import type { AppProps } from "next/app";
 
