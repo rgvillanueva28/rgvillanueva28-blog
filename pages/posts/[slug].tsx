@@ -64,6 +64,12 @@ export default function Posts({ post, contentHtml, categories }: postsProps) {
                 className="object-cover w-full h-40 lg:h-48 xl:h-56 "
               ></img>
             </div> */}
+            <img
+                src={post[0].coverImage[0].url}
+                alt={post[0].title + "cover image"}
+                className="object-fit mx-auto mb-10"
+                style={{maxHeight: 300}}
+              />
             <div className="flex flex-wrap text-justify text-dark">
               <div
                 className="markdown container text-lg"
