@@ -39,7 +39,7 @@ export default function Categories({
   }
 
   if (!categories?.includes(fallbackQuery)) {
-    return <DefaultErrorPage statusCode={404} />
+    return <DefaultErrorPage statusCode={404} />;
   }
 
   return (
@@ -55,11 +55,11 @@ export default function Categories({
 
           <main className="py-16 container">
             <PostCardDiv>
-              {posts?.map((post: any) => (
+              {posts?.map((post) => (
                 <PostCard
                   key={post.slug}
                   slug={post.slug}
-                  image={post.coverImage[0].url}
+                  image={post.coverImage[0]}
                   title={post.title}
                   content={post.excerpt}
                   date={post.date}
