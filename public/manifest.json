@@ -1,7 +1,7 @@
 {
   "theme_color": "#5cdb95",
   "background_color": "#05386b",
-  "display": "browser",
+  "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "short_name": "Rane Gillian Blog",
