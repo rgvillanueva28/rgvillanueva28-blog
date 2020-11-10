@@ -94,7 +94,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const query = params.slug;
 
   let getPosts;
-  process.env.DEV
+  process.env.NODE_ENV === "development"
     ? (getPosts = await fetch(
         `https://rgvillanueva28-strapi.herokuapp.com/posts?categories.category_in=${query}&_sort=date:DESC`
       ))

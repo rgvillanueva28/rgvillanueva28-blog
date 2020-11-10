@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, useViewportScroll } from "framer-motion";
+import Image from "next/image";
 
 import { FaBars, FaCaretUp, FaCaretDown } from "react-icons/fa";
 import pages from "./headerPages";
@@ -30,9 +31,10 @@ export default function Header(props: any) {
       <div className="flex-1 flex justify-between items-center">
         <Link href="/">
           <a className="fill-current">
-            <img
+            <Image
+              alt="Rane Gillian Blog Logo"
               className="bg-foreground rounded-full"
-              src="/logo.png"
+              src="/icon/favicon-96x96.png"
               width="32"
               height="32"
               // onClick={scrollToTop}

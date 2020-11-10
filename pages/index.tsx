@@ -33,7 +33,7 @@ export default function Home({ posts, categories }: indexProps) {
               <PostCard
                 key={post.slug}
                 slug={post.slug}
-                image={post.coverImage[0].url}
+                image={post.coverImage[0]}
                 title={post.title}
                 content={post.excerpt}
                 date={post.date}
@@ -49,7 +49,7 @@ export default function Home({ posts, categories }: indexProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   let getPosts;
-  process.env.DEV
+  process.env.NODE_ENV === "development"
     ? (getPosts = await fetch(
         "https://rgvillanueva28-strapi.herokuapp.com/posts?_sort=date:DESC"
       ))

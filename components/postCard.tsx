@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import Category from "./category";
+import Image from "next/image";
 
 export interface postCardProps {
-  image: string;
+  image: any;
   title: string;
   content: string;
   date: string;
@@ -40,13 +41,13 @@ function PostCard({
                 duration: 0.25,
               }}
             >
-              <div className="">
-                <img
-                  src={image}
-                  alt="postCover"
-                  className="object-cover w-full h-full"
-                ></img>
-              </div>
+              <Image
+                alt={title + " card image"}
+                src={image.url}
+                width={image.width}
+                height={image.height}
+                className="object-cover w-full min-h-full"
+              />
               <motion.div layout className="px-4 py-2 text-dark h-full">
                 {categories.map((category: any) => (
                   <Category key={category.category} text={category.category} />

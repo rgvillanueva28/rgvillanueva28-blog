@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
 import Hero from "../../components/hero";
 
+import Image from "next/image";
+
 import HeroPost from "../../components/heroPost";
 
 export interface postsProps {
@@ -72,7 +74,9 @@ export default function Posts({
           </Head>
 
           <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 xxl:w-7/12">
-            <img
+            <Image
+              width={post[0].coverImage[0].width}
+              height={post[0].coverImage[0].height}
               src={post[0].coverImage[0].url}
               alt={post[0].title + "cover image"}
               className="object-fit mx-auto mb-10"
@@ -93,7 +97,7 @@ export default function Posts({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let getPaths;
-  process.env.DEV
+  process.env.NODE_ENV === "development"
     ? (getPaths = await fetch(
         "https://rgvillanueva28-strapi.herokuapp.com/posts"
       ))
@@ -115,7 +119,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   let getPostContent;
   let content;
   let contentHtml = "error";
-  process.env.DEV
+  process.env.NODE_ENV === "development"
     ? (getPostContent = await fetch(
         `https://rgvillanueva28-strapi.herokuapp.com/posts?slug_eq=${params.slug}`
       ))
