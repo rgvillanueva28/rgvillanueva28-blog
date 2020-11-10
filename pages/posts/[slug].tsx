@@ -9,8 +9,6 @@ import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
 import Hero from "../../components/hero";
 
-import Image from "next/image";
-
 import HeroPost from "../../components/heroPost";
 
 export interface postsProps {
@@ -74,12 +72,12 @@ export default function Posts({
           </Head>
 
           <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 xxl:w-7/12">
-            <Image
-              width={post[0].coverImage[0].width}
-              height={post[0].coverImage[0].height}
+            <img
+              width={post[0].coverImage[0].url}
+              height={post[0].coverImage[0].url}
               src={post[0].coverImage[0].url}
               alt={post[0].title + "cover image"}
-              className="object-fit mx-auto mb-10"
+              className="object-contain mx-auto mb-10"
               style={{ maxHeight: 300 }}
             />
             <div className="flex flex-wrap text-justify text-dark">

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import Category from "./category";
-import Image from "next/image";
 
 export interface postCardProps {
   image: any;
@@ -41,7 +40,7 @@ function PostCard({
                 duration: 0.25,
               }}
             >
-              <Image
+              <img
                 alt={title + " card image"}
                 src={image.url}
                 width={image.width}

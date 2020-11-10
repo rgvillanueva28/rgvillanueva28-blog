@@ -1,77 +1,57 @@
 {
-  "short_name": "Rane Gillian Blog",
-  "name": "A collection of blog posts by Rane Gillian",
-  "lang": "en",
-  "description": "A collection of blog posts crafted from the themes of technology, programming, and personal experiences.",
-  "background_color": "#05386b",
   "theme_color": "#5cdb95",
+  "background_color": "#05386b",
+  "display": "browser",
+  "scope": "/",
   "start_url": "/",
-  "display": "standalone",
+  "short_name": "Rane Gillian Blog",
+  "app_name": "A collection of blog posts by Rane Gillian",
+  "description": "A collection of blog posts crafted from the themes of technology, programming, and personal experiences.",
   "icons": [
     {
-      "src": "/icon/android-icon-192x192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+        "src": "/icon-16x16.png",
+        "sizes": "16x16",
+        "type": "image/png"
     },
     {
-      "src": "/icon/apple-icon-180x180.png",
-      "type": "image/png",
-      "sizes": "180x180"
+        "src": "/icon-32x32.png",
+        "sizes": "32x32",
+        "type": "image/png"
     },
     {
-      "src": "/icon/apple-icon-152x152.png",
-      "type": "image/png",
-      "sizes": "152x152"
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-      "src": "/icon/apple-icon-144x144.png",
-      "type": "image/png",
-      "sizes": "144x144"
+      "src": "/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
     },
     {
-      "src": "/icon/apple-icon-120x120.png",
-      "type": "image/png",
-      "sizes": "120x120"
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
     },
     {
-      "src": "/icon/apple-icon-114x114.png",
-      "type": "image/png",
-      "sizes": "114x114"
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     },
     {
-      "src": "/icon/favicon-96x96.png",
-      "type": "image/png",
-      "sizes": "96x96"
+      "src": "/apple-icon-57x57.png",
+      "sizes": "57x57",
+      "type": "image/png"
     },
     {
-      "src": "/icon/apple-icon-76x76.png",
-      "type": "image/png",
-      "sizes": "76x76"
+      "src": "/apple-icon-76x76.png",
+      "sizes": "76x76",
+      "type": "image/png"
     },
     {
-      "src": "/icon/apple-icon-72x72.png",
-      "type": "image/png",
-      "sizes": "72x72"
-    },
-    {
-      "src": "/icon/apple-icon-60x60.png",
-      "type": "image/png",
-      "sizes": "60x60"
-    },
-    {
-      "src": "/icon/apple-icon-57x57.png",
-      "type": "image/png",
-      "sizes": "57x57"
-    },
-    {
-      "src": "/icon/favicon-32x32.png",
-      "type": "image/png",
-      "sizes": "32x32"
-    },
-    {
-      "src": "/icon/favicon-16x16.png",
-      "type": "image/png",
-      "sizes": "16x16"
+      "src": "/apple-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
     }
   ]
 }
