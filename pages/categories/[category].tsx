@@ -1,14 +1,10 @@
 import Head from "next/head";
-import remark from "remark";
-import html from "remark-html";
 import { AnimatePresence, motion } from "framer-motion";
 import Layout from "../../components/layout";
-import { useEffect } from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
 
-import HeroPost from "../../components/heroPost";
 import Hero from "../../components/hero";
 import PostCard from "../../components/postCard";
 import PostCardDiv from "../../components/postCardDiv";
@@ -26,13 +22,18 @@ export default function Categories({
   query,
 }: categoriesProps) {
   const router = useRouter();
-  const fallbackQuery: any = router.query.slug?.toString().toUpperCase();
+  const fallbackQuery: any = router.query.category?.toString().toUpperCase();
 
   if (router.isFallback) {
     return (
       <AnimatePresence>
         <Layout categories={categories}>
-          <Hero title="Loading" content={".........."} />
+          <Hero
+            title="Loading"
+            content={".........."}
+            categories={undefined}
+            date={undefined}
+          />
         </Layout>
       </AnimatePresence>
     );
@@ -43,34 +44,37 @@ export default function Categories({
   }
 
   return (
-    <AnimatePresence>
-      <Layout categories={categories}>
-        <div>
-          <Head>
-            <title>RANE GILLIAN | BLOG</title>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
+    <Layout categories={categories} className="with-bg">
+      <div>
+        <Head>
+          <title>RANE GILLIAN | BLOG</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-          <Hero title="CATEGORY" content={<Category text={query} />} />
+        <Hero
+          title="CATEGORY"
+          content={<Category text={query} />}
+          categories={undefined}
+          date={undefined}
+        />
 
-          <main className="py-16 container">
-            <PostCardDiv>
-              {posts?.map((post) => (
-                <PostCard
-                  key={post.slug}
-                  slug={post.slug}
-                  image={post.coverImage[0]}
-                  title={post.title}
-                  content={post.excerpt}
-                  date={post.date}
-                  categories={post.categories}
-                />
-              ))}
-            </PostCardDiv>
-          </main>
-        </div>
-      </Layout>
-    </AnimatePresence>
+        <main className="py-16 container">
+          <PostCardDiv>
+            {posts?.map((post) => (
+              <PostCard
+                key={post.slug}
+                slug={post.slug}
+                image={post.coverImage[0]}
+                title={post.title}
+                content={post.excerpt}
+                date={post.date}
+                categories={post.categories}
+              />
+            ))}
+          </PostCardDiv>
+        </main>
+      </div>
+    </Layout>
   );
 }
 
@@ -81,7 +85,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const response = await res.json();
 
   const paths = response.map((category: any) => ({
-    params: { slug: category.category.toLowerCase() },
+    params: { category: category.category.toLowerCase() },
   }));
 
   return {
@@ -91,7 +95,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const query = params.slug;
+  const query = params.category;
 
   let getPosts;
   process.env.NODE_ENV === "development"

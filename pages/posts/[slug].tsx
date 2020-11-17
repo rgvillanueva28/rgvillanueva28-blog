@@ -1,16 +1,20 @@
 import Head from "next/head";
 import remark from "remark";
 import html from "remark-html";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Layout from "../../components/layout";
-import { useEffect } from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
 import Hero from "../../components/hero";
 
-import HeroPost from "../../components/heroPost";
-
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 export interface postsProps {
   post: Array<any>;
   contentHtml: string;
@@ -31,11 +35,14 @@ export default function Posts({
 
   if (router.isFallback) {
     return (
-      <AnimatePresence>
-        <Layout categories={categories}>
-          <Hero title="Loading" content={".........."} />
-        </Layout>
-      </AnimatePresence>
+      <Layout categories={categories}>
+        <Hero
+          title="Loading"
+          content={".........."}
+          categories={undefined}
+          date={undefined}
+        />
+      </Layout>
     );
   }
 
@@ -51,45 +58,41 @@ export default function Posts({
   }).format(dateCreated);
 
   return (
-    <AnimatePresence>
-      <Layout categories={categories}>
-        <HeroPost
-          title={post[0].title}
-          date={date}
-          categories={post[0].categories}
-        />
-        <motion.div
-          key={post[0].slug}
-          className="container py-5 md:py-10 lg:py-16"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, type: "spring", stiffness: 300 }}
-          exit={{ opacity: 0, y: 200 }}
-        >
-          <Head>
-            <title>{post[0].title} - RANE GILLIAN</title>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-
-          <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 xxl:w-7/12">
-            <img
-              width={post[0].coverImage[0].url}
-              height={post[0].coverImage[0].url}
-              src={post[0].coverImage[0].url}
-              alt={post[0].title + "cover image"}
-              className="object-contain mx-auto mb-10"
-              style={{ maxHeight: 300 }}
+    <Layout categories={categories}>
+      <Head>
+        <title>{post[0].title} - RANE GILLIAN</title>
+      </Head>
+      <Hero
+        title={post[0].title}
+        date={date}
+        categories={post[0].categories}
+        content={undefined}
+      />
+      <motion.div
+        key={post[0].slug}
+        className="container py-5 md:py-10 lg:py-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, delay: 0.3, type: "tween" }}
+      >
+        <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 xxl:w-7/12">
+          <img
+            width={post[0].coverImage[0].url}
+            height={post[0].coverImage[0].url}
+            src={post[0].coverImage[0].url}
+            alt={post[0].title + "cover image"}
+            className="object-contain mx-auto mb-10"
+            style={{ maxHeight: 300 }}
+          />
+          <div className="flex flex-wrap text-justify text-dark">
+            <div
+              className="markdown container text-lg"
+              dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
-            <div className="flex flex-wrap text-justify text-dark">
-              <div
-                className="markdown container text-lg"
-                dangerouslySetInnerHTML={{ __html: contentHtml }}
-              />
-            </div>
-          </main>
-        </motion.div>
-      </Layout>
-    </AnimatePresence>
+          </div>
+        </main>
+      </motion.div>
+    </Layout>
   );
 }
 

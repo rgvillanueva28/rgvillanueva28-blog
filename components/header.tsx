@@ -7,7 +7,6 @@ import HeaderSidebar from "./headerSidebar";
 
 export default function Header(props: any) {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const { scrollYProgress } = useViewportScroll();
   const [toggleCategories, setToggleCategories] = useState(false);
 
   return (

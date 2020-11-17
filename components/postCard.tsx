@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { motion, AnimateSharedLayout } from "framer-motion";
+import { motion } from "framer-motion";
 import Category from "./category";
 
 export interface postCardProps {
@@ -11,6 +11,14 @@ export interface postCardProps {
   categories: Array<any>;
 }
 
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1
+  }
+};
+
 function PostCard({
   image,
   title,
@@ -21,10 +29,12 @@ function PostCard({
 }: postCardProps) {
   const dateCreated = new Date(date);
   return (
-    <div className="flex flex-wrap w-full px-6 py-6 md:w-1/2 lg:w-1/3">
+    <motion.div
+    key={slug}
+    variants={item}
+    className="flex flex-wrap w-full px-6 py-6 md:w-1/2 lg:w-1/3">
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a>
-          <AnimateSharedLayout>
             <motion.div
               layout
               className="flex flex-col items-stretch min-h-full pb-2 bg-white shadow-lg overflow-hidden"
@@ -36,8 +46,8 @@ function PostCard({
               whileTap={{ scale: 1.02 }}
               transition={{
                 type: "spring",
-                stiffness: 200,
-                duration: 0.25,
+                stiffness: 150,
+                duration: 0.2,
               }}
             >
               <img
@@ -47,13 +57,13 @@ function PostCard({
                 height={image.height}
                 className="object-cover w-full min-h-full"
               />
-              <motion.div layout className="px-4 py-2 text-dark h-full">
+              <div  className="px-4 py-2 text-dark h-full">
                 {categories.map((category: any) => (
                   <Category key={category.category} text={category.category} />
                 ))}
                 <h5 className="font-medium ">{title}</h5>
                 <p className="">{content}</p>
-              </motion.div>
+              </div>
               <p className="font-light px-4 text-sm text-accent-dark mt-auto">
                 {new Intl.DateTimeFormat("en-US", {
                   year: "numeric",
@@ -62,10 +72,9 @@ function PostCard({
                 }).format(dateCreated)}
               </p>
             </motion.div>
-          </AnimateSharedLayout>
         </a>
       </Link>
-    </div>
+    </motion.div>
   );
 }
 

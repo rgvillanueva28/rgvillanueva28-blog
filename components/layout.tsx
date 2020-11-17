@@ -36,7 +36,10 @@ export default function LayoutComponent(props: any) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="description" content="A collection of blog posts crafted from the themes of technology, programming, and personal experiences." />
+        <meta
+          name="description"
+          content="A collection of blog posts crafted from the themes of technology, programming, and personal experiences."
+        />
         <meta name="theme-color" content="#5cdb95" />
         <link rel="apple-touch-icon" href="apple-icon-180x180.png"></link>
         <link
@@ -46,37 +49,23 @@ export default function LayoutComponent(props: any) {
       </Head>
       <Header onTop={onTop} isLarge={isLarge} categories={props.categories} />
       <AnimatePresence>
-        <motion.div
-          className="min-h-screen"
-          key="mainContainer"
-          initial="pageInitial"
-          animate="pageAnimate"
-          exit="pageExit"
-          variants={{
-            pageInitial: {
-              opacity: 0,
-              // y: -100,
-            },
-            pageAnimate: {
-              opacity: 1,
-              // y: 0,
-              transition: {
-                duration: 1,
-                delay: 0.25,
-                type: "spring",
-                stiffness: 500,
-              },
-            },
-            pageExit: {
-              opacity: 0,
-              // y: 100,
+        <div className="min-h-screen relative flex flex-col">
+          <motion.div
+          className={"flex flex-col flex-1 " + props.className}
+          animate={{
+            transition: {
+              delayChildren: 0.5,
+              staggerChildren: 0.1,
             },
           }}
         >
           {props.children}
         </motion.div>
-      </AnimatePresence>
       <Footer />
+        </div>
+        
+      </AnimatePresence>
+
     </>
   );
 }

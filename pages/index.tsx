@@ -1,10 +1,8 @@
 import Head from "next/head";
 import PostCardDiv from "../components/postCardDiv";
 import PostCard from "../components/postCard";
-import Header from "../components/header";
 import Layout from "../components/layout";
 import Hero from "../components/hero";
-import { motion } from "framer-motion";
 import { GetStaticProps, GetStaticPaths  } from 'next'
 
 export interface indexProps {
@@ -14,8 +12,8 @@ export interface indexProps {
 
 export default function Home({ posts, categories }: indexProps) {
   return (
-    <Layout categories={categories}>
-      <div>
+    <Layout categories={categories} className="with-bg">
+      <div >
         <Head>
           <title>RANE GILLIAN | BLOG</title>
           <link rel="icon" href="/favicon.ico" />
@@ -25,6 +23,7 @@ export default function Home({ posts, categories }: indexProps) {
           title="BLOG HOMEPAGE"
           content="A collection of blog posts crafted from the themes of technology,
           programming, and personal experiences."
+          categories={undefined} date={undefined}
         />
 
         <main className="py-16 container">
