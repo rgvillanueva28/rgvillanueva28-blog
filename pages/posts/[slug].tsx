@@ -39,8 +39,6 @@ export default function Posts({
         <Hero
           title="Loading"
           content={".........."}
-          categories={undefined}
-          date={undefined}
         />
       </Layout>
     );
@@ -66,7 +64,6 @@ export default function Posts({
         title={post[0].title}
         date={date}
         categories={post[0].categories}
-        content={undefined}
       />
       <motion.div
         key={post[0].slug}

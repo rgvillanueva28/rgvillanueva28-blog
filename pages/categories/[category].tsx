@@ -31,8 +31,6 @@ export default function Categories({
           <Hero
             title="Loading"
             content={".........."}
-            categories={undefined}
-            date={undefined}
           />
         </Layout>
       </AnimatePresence>
@@ -54,8 +52,6 @@ export default function Categories({
         <Hero
           title="CATEGORY"
           content={<Category text={query} />}
-          categories={undefined}
-          date={undefined}
         />
 
         <main className="py-16 container">

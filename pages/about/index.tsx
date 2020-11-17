@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Layout from "../../components/layout";
 import Hero from "../../components/hero";
-import PostCardDiv from "../../components/postCardDiv";
 import { GetStaticProps } from "next";
 import FooterLink from "../../components/footerLink";
 
+import { motion } from "framer-motion";
 export interface indexProps {
   categories: Array<any> | undefined;
 }
@@ -21,18 +21,25 @@ export default function Home({ categories }: indexProps) {
           title="ABOUT"
           content="A collection of blog posts crafted from the themes of technology,
           programming, and personal experiences."
-          categories={undefined}
-          date={undefined}
         />
 
         <main className="py-16 container">
-          <PostCardDiv>
+          <motion.div
+          initial={{
+              opacity:0
+          }}
+          animate={{
+              opacity:1,
+              transition: {
+                  delay: 0.3
+              }
+          }}
+          className="flex flex-row flex-wrap mx-auto w-11/12 md:w-10/12 lg:w-9/12">
             <p className="text-justify">
               Hi there, I am Rane Villanueva and I am very pleased that you have
               visited my website.
-              <br />
-              I created this blog website as my way of
-              learning frontend development particularly{" "}
+              <br />I created this blog website as my way of learning frontend
+              development particularly{" "}
               <FooterLink
                 href="https://reactjs.org/"
                 text="React"
@@ -52,7 +59,7 @@ export default function Home({ categories }: indexProps) {
               />
               . Next.JS is utilized for SSG and Strapi for the headless CMS.
             </p>
-          </PostCardDiv>
+          </motion.div>
         </main>
       </div>
     </Layout>

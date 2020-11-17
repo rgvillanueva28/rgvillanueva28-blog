@@ -23,7 +23,6 @@ export default function Home({ posts, categories }: indexProps) {
           title="BLOG HOMEPAGE"
           content="A collection of blog posts crafted from the themes of technology,
           programming, and personal experiences."
-          categories={undefined} date={undefined}
         />
 
         <main className="py-16 container">

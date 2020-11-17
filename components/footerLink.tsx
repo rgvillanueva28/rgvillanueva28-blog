@@ -1,7 +1,7 @@
 interface footerLinkProps {
   href: string;
   text: string;
-  className: string;
+  className?: string;
 }
 
 export default function FooterLink({ href, text, className }: footerLinkProps) {

@@ -16,9 +16,9 @@ const animation = {
 
 interface HeroProps {
   title: string;
-  content: any | undefined;
-  date: string | undefined;
-  categories: Array<any> | undefined;
+  content?: any;
+  date?: string;
+  categories?: Array<any>;
 }
 
 export default function Hero({ title, content, date, categories }: HeroProps) {
