@@ -23,16 +23,22 @@ interface HeroProps {
 
 export default function Hero({ title, content, date, categories }: HeroProps) {
   return (
-    <div className="bg-gradient-to-b from-accent-dark to-dark">
+    <div className="relative min-w-full">
+      <div
+        style={{ minHeight: "50vh" }}
+        className="absolute top-0 z-0 min-w-full bg-gradient-to-b from-dark to-transparent"
+      ></div>
       {title && content ? (
         <motion.div
           key={title}
           variants={animation}
           initial="initial"
           animate="animate"
-          className="text-center py-16 mx-5"
+          className="relative z-10 container px-10 text-center pt-20 pb-8 md:pb-16"
         >
-          <h1 className=" text-accent-light text-3xl md:text-4xl">{title}</h1>
+          <h1 className=" text-accent-light text-3xl md:text-4xl font-semibold mt-10 md:mt-16 ">
+            {title}
+          </h1>
           <p className=" text-accent-mid">{content}</p>
         </motion.div>
       ) : (
@@ -41,10 +47,12 @@ export default function Hero({ title, content, date, categories }: HeroProps) {
           variants={animation}
           initial="initial"
           animate="animate"
-          className="text-center pt-16 mx-5 pb-8"
+          className="relative z-10  container px-10 text-center pt-20 pb-8 md:pb-16"
         >
-          <h1 className=" text-accent-light text-3xl md:text-4xl">{title}</h1>
-          <p className="text-accent-dark mb-5">{date}</p>
+          <h1 className=" text-accent-light text-3xl md:text-4xl mt-2 md:mt-10">
+            {title}
+          </h1>
+          <p className="text-accent-mid m-5">{date}</p>
           {categories?.map((category) => (
             <Category link={category.category} key={category.category} />
           ))}

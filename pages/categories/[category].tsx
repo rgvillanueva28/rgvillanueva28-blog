@@ -28,10 +28,7 @@ export default function Categories({
     return (
       <AnimatePresence>
         <Layout categories={categories}>
-          <Hero
-            title="Loading"
-            content={".........."}
-          />
+          <Hero title="Loading" content={".........."} />
         </Layout>
       </AnimatePresence>
     );
@@ -49,12 +46,9 @@ export default function Categories({
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <Hero
-          title="CATEGORY"
-          content={<Category text={query} />}
-        />
+        <Hero title="CATEGORY" content={<Category text={query} />} />
 
-        <main className="py-16 container">
+        <main className="relative my-5 container z-20">
           <PostCardDiv>
             {posts?.map((post) => (
               <PostCard

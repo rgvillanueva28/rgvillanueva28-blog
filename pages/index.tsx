@@ -25,7 +25,7 @@ export default function Home({ posts, categories }: indexProps) {
           programming, and personal experiences."
         />
 
-        <main className="py-16 container">
+        <main className="relative my-5 container z-20">
           <PostCardDiv>
             {posts?.map((post) => (
               <PostCard

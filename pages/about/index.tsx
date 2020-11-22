@@ -23,18 +23,19 @@ export default function Home({ categories }: indexProps) {
           programming, and personal experiences."
         />
 
-        <main className="py-16 container">
+        <main className="relative my-5 container z-20">
           <motion.div
-          initial={{
-              opacity:0
-          }}
-          animate={{
-              opacity:1,
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
               transition: {
-                  delay: 0.3
-              }
-          }}
-          className="flex flex-row flex-wrap mx-auto w-11/12 md:w-10/12 lg:w-9/12">
+                delay: 0.3,
+              },
+            }}
+            className="flex flex-row flex-wrap mx-auto w-11/12 md:w-10/12 lg:w-9/12 "
+          >
             <p className="text-justify">
               Hi there, I am Rane Villanueva and I am very pleased that you have
               visited my website.

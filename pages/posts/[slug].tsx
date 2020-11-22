@@ -36,10 +36,7 @@ export default function Posts({
   if (router.isFallback) {
     return (
       <Layout categories={categories}>
-        <Hero
-          title="Loading"
-          content={".........."}
-        />
+        <Hero title="Loading" content={".........."} />
       </Layout>
     );
   }
@@ -60,25 +57,26 @@ export default function Posts({
       <Head>
         <title>{post[0].title} - RANE GILLIAN</title>
       </Head>
-      <Hero
-        title={post[0].title}
-        date={date}
-        categories={post[0].categories}
-      />
+      <Hero title={post[0].title} date={date} categories={post[0].categories} />
+
       <motion.div
         key={post[0].slug}
-        className="container py-5 md:py-10 lg:py-16"
+        className="relative py-5 container z-20 "
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, delay: 0.3, type: "tween" }}
       >
-        <main className="container mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 xxl:w-7/12">
+        {/* <div
+          style={{ minHeight: "50vh" }}
+          className="absolute top-0 z-0 min-w-full bg-gradient-to-b from-dark to-transparent rounded-2xl opacity-75"
+        ></div> */}
+        <main className="relative z-10 mb-20 container mx-auto w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 xxl:w-7/12">
           <img
             width={post[0].coverImage[0].url}
             height={post[0].coverImage[0].url}
             src={post[0].coverImage[0].url}
             alt={post[0].title + "cover image"}
-            className="object-contain mx-auto mb-10"
+            className="object-contain mx-auto mt-2 mb-5 md:my-10"
             style={{ maxHeight: 300 }}
           />
           <div className="flex flex-wrap text-justify text-dark">
@@ -88,6 +86,9 @@ export default function Posts({
             />
           </div>
         </main>
+        {/* <div className="absolute z-20 min-w-full mx-auto bg-gradient-to-b  from-dark to-transparent rounded-lg"
+         style={{ top: "80px", minHeight: "500px", maxHeight: "500px" }}
+        ></div> */}
       </motion.div>
     </Layout>
   );
