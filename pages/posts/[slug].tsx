@@ -61,7 +61,7 @@ export default function Posts({
 
       <motion.div
         key={post[0].slug}
-        className="relative py-5 container z-20 "
+        className="relative py-5 container z-20 md:pt-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, delay: 0.3, type: "tween" }}

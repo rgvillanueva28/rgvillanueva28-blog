@@ -24,39 +24,44 @@ interface HeroProps {
 export default function Hero({ title, content, date, categories }: HeroProps) {
   return (
     <div className="relative min-w-full">
-      <div
-        style={{ minHeight: "50vh" }}
-        className="absolute top-0 z-0 min-w-full bg-gradient-to-b from-dark to-transparent"
-      ></div>
       {title && content ? (
-        <motion.div
-          key={title}
-          variants={animation}
-          initial="initial"
-          animate="animate"
-          className="relative z-10 container px-10 text-center pt-20 pb-8 md:pb-16"
-        >
-          <h1 className=" text-accent-light text-3xl md:text-4xl font-semibold mt-10 md:mt-16 ">
-            {title}
-          </h1>
-          <p className=" text-accent-mid">{content}</p>
-        </motion.div>
+        <>
+          <div
+            style={{ minHeight: "50vh" }}
+            className="absolute top-0 z-0 min-w-full bg-gradient-to-b from-dark to-transparent"
+          ></div>
+          <motion.div
+            key={title}
+            variants={animation}
+            initial="initial"
+            animate="animate"
+            className="relative z-10 container px-10 text-center pt-20 pb-8 md:pb-16"
+          >
+            <h1 className=" text-accent-light text-3xl md:text-4xl font-semibold mt-10 md:mt-16 ">
+              {title}
+            </h1>
+            <p className=" text-accent-mid">{content}</p>
+          </motion.div>
+        </>
       ) : (
-        <motion.div
-          key={title}
-          variants={animation}
-          initial="initial"
-          animate="animate"
-          className="relative z-10  container px-10 text-center pt-20 pb-8 md:pb-16"
-        >
-          <h1 className=" text-accent-light text-3xl md:text-4xl mt-2 md:mt-10">
-            {title}
-          </h1>
-          <p className="text-accent-mid m-5">{date}</p>
-          {categories?.map((category) => (
-            <Category link={category.category} key={category.category} />
-          ))}
-        </motion.div>
+        <>
+          <div className="absolute top-0 z-0  min-h-screen min-w-full bg-gradient-to-b from-dark to-transparent"></div>
+          <motion.div
+            key={title}
+            variants={animation}
+            initial="initial"
+            animate="animate"
+            className="relative z-10  container px-10 text-center pt-20 pb-8 md:pb-16"
+          >
+            <h1 className=" text-accent-light text-3xl md:text-4xl mt-8 md:mt-16">
+              {title}
+            </h1>
+            <p className="text-accent-mid m-5">{date}</p>
+            {categories?.map((category) => (
+              <Category link={category.category} key={category.category} />
+            ))}
+          </motion.div>
+        </>
       )}
     </div>
   );
