@@ -52,7 +52,7 @@ export default function Categories({
 
         <main className="relative my-5 container z-20">
           <PostCardDiv>
-            {posts?.map((post) => (
+            {/* {posts?.map((post) => (
               <PostCard
                 key={post.slug}
                 slug={post.slug}
@@ -62,7 +62,7 @@ export default function Categories({
                 date={post.date}
                 categories={post.categories}
               />
-            ))}
+            ))} */}
           </PostCardDiv>
         </main>
       </div>
