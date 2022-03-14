@@ -5,6 +5,8 @@ import { GetStaticProps } from "next";
 import FooterLink from "../../components/footerLink";
 
 import { motion } from "framer-motion";
+
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 export interface indexProps {
   categories: Array<any> | undefined;
 }
@@ -68,9 +70,7 @@ export default function Home({ categories }: indexProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const getCats = await fetch(
-    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
-  );
+  const getCats = await fetch(`${NEXT_PUBLIC_API_URL}/categories?_sort=category:ASC"`);
   let cats: Array<any> | undefined = await getCats.json();
   let categories = cats?.map((cat) => cat.category.toUpperCase());
 

@@ -3,17 +3,18 @@ import PostCardDiv from "../components/postCardDiv";
 import PostCard from "../components/postCard";
 import Layout from "../components/layout";
 import Hero from "../components/hero";
-import { GetStaticProps, GetStaticPaths  } from 'next'
+import { GetStaticProps, GetStaticPaths } from "next";
 
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 export interface indexProps {
   posts: Array<any> | undefined;
-  categories: Array<any> | undefined;
+  categories: any | undefined;
 }
 
 export default function Home({ posts, categories }: indexProps) {
   return (
     <Layout categories={categories} className="with-bg">
-      <div >
+      <div>
         <Head>
           <title>RANE GILLIAN | BLOG</title>
           <link rel="icon" href="/favicon.ico" />
@@ -29,13 +30,14 @@ export default function Home({ posts, categories }: indexProps) {
           <PostCardDiv>
             {posts?.map((post) => (
               <PostCard
-                key={post.slug}
-                slug={post.slug}
-                image={post.coverImage[0]}
-                title={post.title}
-                content={post.excerpt}
-                date={post.date}
-                categories={post.categories}
+                key={post.attributes.slug}
+                slug={post.attributes.slug}
+                image={post.attributes.coverImage}
+                title={post.attributes.title}
+                content={post.attributes.excerpt}
+                publishedAt={post.attributes.publishedAt}
+                updatedAt={post.attributes.updatedAt}
+                categories={categories}
               />
             ))}
           </PostCardDiv>
@@ -49,18 +51,21 @@ export const getStaticProps: GetStaticProps = async () => {
   let getPosts;
   process.env.NODE_ENV === "development"
     ? (getPosts = await fetch(
-        "https://rgvillanueva28-strapi.herokuapp.com/posts?_sort=date:DESC"
+        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&sort[0]=updatedAt&publicationState=preview`
       ))
     : (getPosts = await fetch(
-        "https://rgvillanueva28-strapi.herokuapp.com/posts?status_eq=published&_sort=date:DESC"
+        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&sort[0]=updatedAt`
       ));
-  let posts: Array<any> | undefined = await getPosts.json();
 
-  const getCats = await fetch(
-    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
+  let posts: any | undefined = await getPosts.json();
+  posts = posts?.data;
+
+  let getCats = await fetch(`${NEXT_PUBLIC_API_URL}/api/categories?sort[0]=category`);
+  let cats: any | undefined = await getCats.json();
+  cats = cats?.data;
+  let categories = cats?.map((cat: any) =>
+    cat.attributes.category.toUpperCase()
   );
-  let cats: Array<any> | undefined = await getCats.json();
-  let categories = cats?.map((cat) => cat.category.toUpperCase());
 
   return {
     props: {
@@ -69,4 +74,4 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     revalidate: 60,
   };
-}
+};

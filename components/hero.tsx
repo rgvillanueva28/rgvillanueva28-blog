@@ -58,7 +58,7 @@ export default function Hero({ title, content, date, categories }: HeroProps) {
             </h1>
             <p className="text-accent-mid m-5">{date}</p>
             {categories?.map((category) => (
-              <Category link={category.category} key={category.category} />
+              <Category link={category.attributes.category} slug={category.attributes.slug} key={category.attributes.slug} />
             ))}
           </motion.div>
         </>

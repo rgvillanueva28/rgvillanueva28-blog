@@ -10,6 +10,8 @@ import PostCard from "../../components/postCard";
 import PostCardDiv from "../../components/postCardDiv";
 import Category from "../../components/category";
 
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export interface categoriesProps {
   posts: Array<any> | undefined;
   categories: Array<any> | undefined;
@@ -69,9 +71,7 @@ export default function Categories({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(
-    "https://rgvillanueva28-strapi.herokuapp.com/categories/"
-  );
+  const res = await fetch(`${NEXT_PUBLIC_API_URL}/categories/`);
   const response = await res.json();
 
   const paths = response.map((category: any) => ({
@@ -90,16 +90,15 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   let getPosts;
   process.env.NODE_ENV === "development"
     ? (getPosts = await fetch(
-        `https://rgvillanueva28-strapi.herokuapp.com/posts?categories.category_in=${query}&_sort=date:DESC`
+        `${NEXT_PUBLIC_API_URL}/blog-posts?categories.category_in=${query}&_sort=date:DESC`
       ))
     : (getPosts = await fetch(
-        `https://rgvillanueva28-strapi.herokuapp.com/posts?status_eq=published&categories.category_in=${query}&_sort=date:DESC`
+        `${NEXT_PUBLIC_API_URL}/blog-posts?status_eq=published&categories.category_in=${query}&_sort=date:DESC`
       ));
-  const posts: Array<any> | undefined = await getPosts.json();
+  let posts: any | undefined = await getPosts.json();
+  posts = posts?.data;
 
-  const getCats = await fetch(
-    "https://rgvillanueva28-strapi.herokuapp.com/categories?_sort=category:ASC"
-  );
+  const getCats = await fetch(`${NEXT_PUBLIC_API_URL}/categories?_sort=category:ASC`);
   let cats: Array<any> | undefined = await getCats.json();
   let categories = cats?.map((cat) => cat.category.toUpperCase());
 
