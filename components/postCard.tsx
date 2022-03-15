@@ -41,7 +41,7 @@ function PostCard({
       variants={item}
       className="flex flex-wrap w-full px-6 py-6 md:w-1/2 lg:w-1/3"
     >
-      <Link as={`/blog-posts/${slug}`} href="/blog-posts/[slug]">
+      <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <a>
           <motion.div
             layout

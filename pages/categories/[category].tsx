@@ -52,17 +52,18 @@ export default function Categories({
 
         <main className="relative my-5 container z-20">
           <PostCardDiv>
-            {/* {posts?.map((post) => (
+            {posts?.map((post) => (
               <PostCard
-                key={post.slug}
-                slug={post.slug}
-                image={post.coverImage[0]}
-                title={post.title}
-                content={post.excerpt}
-                date={post.date}
-                categories={post.categories}
+                key={post.attributes.slug}
+                slug={post.attributes.slug}
+                image={post.attributes.coverImage}
+                title={post.attributes.title}
+                content={post.attributes.excerpt}
+                publishedAt={post.attributes.publishedAt}
+                updatedAt={post.attributes.updatedAt}
+                categories={categories}
               />
-            ))} */}
+            ))}
           </PostCardDiv>
         </main>
       </div>
@@ -71,15 +72,30 @@ export default function Categories({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`${NEXT_PUBLIC_API_URL}/categories/`);
-  const response = await res.json();
-
-  const paths = response.map((category: any) => ({
-    params: { category: category.category.toLowerCase() },
-  }));
+  let getPaths;
+  process.env.NODE_ENV === "development"
+    ? (getPaths = await fetch(
+        `${NEXT_PUBLIC_API_URL}/api/categories?sort[0]=category&publicationState=preview`
+      ))
+    : (getPaths = await fetch(
+        `${NEXT_PUBLIC_API_URL}/api/categories?sort[0]=category`
+      ));
+  let cats = await getPaths.json();
+  cats = cats?.data;
+  // console.log(cats);
+  let categories = cats?.map((category: any) =>
+    category.attributes.category.toLowerCase()
+  );
 
   return {
-    paths,
+    paths: categories?.map((category: any) => {
+      // console.log(category);
+      return {
+        params: {
+          category,
+        },
+      };
+    }),
     fallback: true,
   };
 };
@@ -90,17 +106,23 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   let getPosts;
   process.env.NODE_ENV === "development"
     ? (getPosts = await fetch(
-        `${NEXT_PUBLIC_API_URL}/blog-posts?categories.category_in=${query}&_sort=date:DESC`
+        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&publicationState=preview&filters[categories][slug][$in]=${query}`
       ))
     : (getPosts = await fetch(
-        `${NEXT_PUBLIC_API_URL}/blog-posts?status_eq=published&categories.category_in=${query}&_sort=date:DESC`
+        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&filters[categories.category][$in]=${query}`
       ));
   let posts: any | undefined = await getPosts.json();
   posts = posts?.data;
+  // console.log(posts)
 
-  const getCats = await fetch(`${NEXT_PUBLIC_API_URL}/categories?_sort=category:ASC`);
-  let cats: Array<any> | undefined = await getCats.json();
-  let categories = cats?.map((cat) => cat.category.toUpperCase());
+  let getCats = await fetch(
+    `${NEXT_PUBLIC_API_URL}/api/categories?sort[0]=category`
+  );
+  let cats: any | undefined = await getCats.json();
+  cats = cats?.data;
+  let categories = cats?.map((cat: any) =>
+    cat.attributes.category.toUpperCase()
+  );
 
   return {
     props: {

@@ -18,14 +18,12 @@ const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export interface postsProps {
   post: Array<any>;
-  contentHtml: string;
   categories: any | undefined;
   useHighlightAll: any;
 }
 
 export default function Posts({
   post,
-  contentHtml,
   categories,
   useHighlightAll,
 }: postsProps) {
@@ -42,7 +40,7 @@ export default function Posts({
     );
   }
 
-  if (!post || contentHtml === "error") {
+  if (!post) {
     return <DefaultErrorPage statusCode={404} />;
   }
 
@@ -63,7 +61,7 @@ export default function Posts({
   return (
     <Layout categories={categories}>
       <Head>
-        <title>{post[0].attributes.title} - RANE GILLIAN</title>
+        <title>{post[0].attributes.title} - Rane Villanueva | Blog</title>
       </Head>
       <Hero
         title={post[0].attributes.title}
@@ -119,19 +117,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // console.log(posts)
   posts = posts?.data;
   return {
-    paths: posts?.map((post: any) => ({
-      params: {
-        slug: post.attributes.slug,
-      },
-    })),
+    paths: posts?.map((post: any) => {
+      console.log(post.attributes.slug);
+      return {
+        params: {
+          slug: post.attributes.slug,
+        },
+      };
+    }),
     fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   let getPostContent;
-  let content;
-  let contentHtml = "error";
   process.env.NODE_ENV === "development"
     ? (getPostContent = await fetch(
         `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&filters[slug][$eq]=${params.slug}&publicationState=preview`
@@ -143,7 +142,9 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   let post = await getPostContent.json();
   post = post.data;
 
-  let getCats = await fetch(`${NEXT_PUBLIC_API_URL}/api/categories?sort[0]=category`);
+  let getCats = await fetch(
+    `${NEXT_PUBLIC_API_URL}/api/categories?sort[0]=category`
+  );
   let cats: any | undefined = await getCats.json();
   cats = cats?.data;
   let categories = cats?.map((cat: any) =>
@@ -153,7 +154,6 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   return {
     props: {
       post,
-      contentHtml,
       categories,
     },
     revalidate: 60,

@@ -51,10 +51,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   let getPosts;
   process.env.NODE_ENV === "development"
     ? (getPosts = await fetch(
-        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&sort[0]=updatedAt&publicationState=preview`
+        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&sort[0]=updatedAt:desc&publicationState=preview`
       ))
     : (getPosts = await fetch(
-        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&sort[0]=updatedAt`
+        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&sort[0]=updatedAt:desc`
       ));
 
   let posts: any | undefined = await getPosts.json();
