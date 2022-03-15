@@ -1,6 +1,4 @@
 import Head from "next/head";
-import remark from "remark";
-import html from "remark-html";
 import { motion } from "framer-motion";
 import Layout from "../../components/layout";
 import { GetStaticProps, GetStaticPaths } from "next";
@@ -144,12 +142,6 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 
   let post = await getPostContent.json();
   post = post.data;
-  if (post.length > 0) {
-    content = await remark().use(html).process(post[0].content);
-    contentHtml = content
-      .toString()
-      .replace(/a\shref/g, 'a target="_blank" href');
-  }
 
   let getCats = await fetch(`${NEXT_PUBLIC_API_URL}/api/categories?sort[0]=category`);
   let cats: any | undefined = await getCats.json();

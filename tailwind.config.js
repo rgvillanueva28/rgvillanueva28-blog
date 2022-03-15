@@ -1,6 +1,6 @@
 module.exports = {
   important: true,
-  purge: [
+  content: [
     "./components/**/*.{ts,tsx,js,jsx}",
     "./pages/**/*.{ts,tsx,js,jsx}",
   ],
@@ -27,11 +27,6 @@ module.exports = {
         foreground: "#EDF5E1",
       },
     },
-  },
-  variants: {
-    animation: ["responsive", "hover", "focus"],
-    scale: ["responsive", "hover", "focus", "active", "group-hover"],
-    borderRadius: ["responsive", "hover", "focus"],
   },
   plugins: [],
   future: {

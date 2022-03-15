@@ -1,6 +1,6 @@
 {
   "name": "ranegillian-blog",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,26 +9,30 @@
   },
   "dependencies": {
     "@types/nprogress": "^0.2.0",
-    "@types/prismjs": "^1.16.1",
-    "autoprefixer": "9.8.6",
-    "babel-plugin-prismjs": "^2.0.1",
-    "framer-motion": "^2.7.7",
-    "next": "10.0.2",
-    "next-pwa": "^3.1.5",
+    "@types/prismjs": "^1.26.0",
+    "autoprefixer": "^10.4.2",
+    "babel-plugin-prismjs": "^2.1.0",
+    "framer-motion": "^6.2.8",
+    "next": "^12.1.0",
+    "next-pwa": "^5.4.6",
     "nprogress": "^0.2.0",
-    "postcss": "^8.1.9",
-    "postcss-import": "^13.0.0",
-    "prismjs": "^1.21.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-icons": "^3.11.0",
-    "remark": "^12.0.1",
-    "remark-html": "^12.0.0",
-    "tailwindcss": "^2.0.1"
+    "postcss": "^8.4.8",
+    "postcss-import": "^14.0.2",
+    "prismjs": "^1.27.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
+    "remark": "^14.0.2",
+    "remark-html": "^15.0.1",
+    "tailwindcss": "^3.0.23"
   },
   "devDependencies": {
-    "@types/node": "^14.11.2",
-    "@types/react": "^16.9.50",
-    "typescript": "^4.0.3"
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "@tailwindcss/line-clamp": "^0.3.1",
+    "@tailwindcss/typography": "^0.5.2",
+    "@types/node": "^17.0.21",
+    "@types/react": "^17.0.40",
+    "typescript": "^4.6.2"
   }
 }

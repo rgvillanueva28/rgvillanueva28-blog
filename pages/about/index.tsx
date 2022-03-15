@@ -70,9 +70,14 @@ export default function Home({ categories }: indexProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const getCats = await fetch(`${NEXT_PUBLIC_API_URL}/categories?_sort=category:ASC"`);
-  let cats: Array<any> | undefined = await getCats.json();
-  let categories = cats?.map((cat) => cat.category.toUpperCase());
+  let getCats = await fetch(
+    `${NEXT_PUBLIC_API_URL}/api/categories?sort[0]=category`
+  );
+  let cats: any | undefined = await getCats.json();
+  cats = cats?.data;
+  let categories = cats?.map((cat: any) =>
+    cat.attributes
+  );
 
   return {
     props: {
