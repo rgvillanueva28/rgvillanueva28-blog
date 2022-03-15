@@ -39,6 +39,8 @@ export default function Categories({
     );
   }
 
+  // console.log(categorySelected);
+
   if (!categorySelected) {
     return <DefaultErrorPage statusCode={404} />;
   }
@@ -112,10 +114,10 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   let getPosts;
   process.env.NODE_ENV === "development"
     ? (getPosts = await fetch(
-        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&publicationState=preview&filters[categories][slug][$in]=${query}`
+        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&filters[categories][slug][$in]=${query}&publicationState=preview`
       ))
     : (getPosts = await fetch(
-        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&filters[categories.category][$in]=${query}`
+        `${NEXT_PUBLIC_API_URL}/api/blog-posts?populate=%2A&filters[categories][slug][$in]=${query}`
       ));
   let posts: any | undefined = await getPosts.json();
   posts = posts?.data;
@@ -135,7 +137,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
       posts,
       categories,
       query,
-      categorySelected,
+      categorySelected: categorySelected ? categorySelected: null,
     },
     revalidate: 60,
   };

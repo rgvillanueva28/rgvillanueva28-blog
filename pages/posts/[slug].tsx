@@ -40,6 +40,8 @@ export default function Posts({
     );
   }
 
+  console.log(post);
+
   if (!post) {
     return <DefaultErrorPage statusCode={404} />;
   }
@@ -147,13 +149,11 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   );
   let cats: any | undefined = await getCats.json();
   cats = cats?.data;
-  let categories = cats?.map((cat: any) =>
-    cat.attributes
-  );
+  let categories = cats?.map((cat: any) => cat.attributes);
 
   return {
     props: {
-      post,
+      post: post.length != 0 ? post : null,
       categories,
     },
     revalidate: 60,
