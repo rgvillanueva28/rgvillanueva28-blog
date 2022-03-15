@@ -28,7 +28,7 @@ export default function Posts({
   useHighlightAll,
 }: postsProps) {
   const router = useRouter();
-  const fallbackQuery: any = router.query.slug?.toString().toUpperCase();
+  // const fallbackQuery: any = router.query.slug?.toString().toUpperCase();
 
   useHighlightAll();
 
@@ -118,7 +118,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   posts = posts?.data;
   return {
     paths: posts?.map((post: any) => {
-      console.log(post.attributes.slug);
+      // console.log(post.attributes.slug);
       return {
         params: {
           slug: post.attributes.slug,
@@ -148,7 +148,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   let cats: any | undefined = await getCats.json();
   cats = cats?.data;
   let categories = cats?.map((cat: any) =>
-    cat.attributes.category.toUpperCase()
+    cat.attributes
   );
 
   return {

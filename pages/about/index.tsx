@@ -76,7 +76,7 @@ export const getStaticProps: GetStaticProps = async () => {
   let cats: any | undefined = await getCats.json();
   cats = cats?.data;
   let categories = cats?.map((cat: any) =>
-    cat.attributes.category.toUpperCase()
+    cat.attributes
   );
 
   return {

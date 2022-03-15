@@ -36,7 +36,7 @@ export default function Home({ posts, categories }: indexProps) {
                   content={post.attributes.excerpt}
                   publishedAt={post.attributes.publishedAt}
                   updatedAt={post.attributes.updatedAt}
-                  categories={categories}
+                  categories={post.attributes.categories.data}
                 />
               ))}
             </PostCardDiv>
@@ -66,7 +66,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   let cats: any | undefined = await getCats.json();
   cats = cats?.data;
   let categories = cats?.map((cat: any) =>
-    cat.attributes.category.toUpperCase()
+    cat.attributes
   );
 
   return {

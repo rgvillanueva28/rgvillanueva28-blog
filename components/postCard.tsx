@@ -67,7 +67,7 @@ function PostCard({
             />
             <div className="px-4 py-2 text-dark h-full">
               {categories.map((category: any) => (
-                <Category key={category} text={category} />
+                <Category key={category.attributes.slug} text={category.attributes.category} />
               ))}
               <h5 className="font-medium ">{title}</h5>
               <p className="">{content}</p>

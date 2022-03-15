@@ -16,15 +16,18 @@ export interface categoriesProps {
   posts: Array<any> | undefined;
   categories: Array<any> | undefined;
   query: string;
+  categorySelected: any;
 }
 
 export default function Categories({
   posts,
   categories,
   query,
+  categorySelected,
 }: categoriesProps) {
   const router = useRouter();
-  const fallbackQuery: any = router.query.category?.toString().toUpperCase();
+  // const fallbackQuery: any = router.query.category?.toString().toLowerCase();
+  // console.log(fallbackQuery)
 
   if (router.isFallback) {
     return (
@@ -36,7 +39,7 @@ export default function Categories({
     );
   }
 
-  if (!categories?.includes(fallbackQuery)) {
+  if (!categorySelected) {
     return <DefaultErrorPage statusCode={404} />;
   }
 
@@ -48,7 +51,10 @@ export default function Categories({
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <Hero title="CATEGORY" content={<Category text={query} />} />
+        <Hero
+          title="CATEGORY"
+          content={<Category text={categorySelected.category} />}
+        />
 
         <main className="relative my-5 container z-20">
           <PostCardDiv>
@@ -61,7 +67,7 @@ export default function Categories({
                 content={post.attributes.excerpt}
                 publishedAt={post.attributes.publishedAt}
                 updatedAt={post.attributes.updatedAt}
-                categories={categories}
+                categories={post.attributes.categories.data}
               />
             ))}
           </PostCardDiv>
@@ -84,7 +90,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   cats = cats?.data;
   // console.log(cats);
   let categories = cats?.map((category: any) =>
-    category.attributes.category.toLowerCase()
+    category.attributes.slug.toLowerCase()
   );
 
   return {
@@ -120,15 +126,16 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   );
   let cats: any | undefined = await getCats.json();
   cats = cats?.data;
-  let categories = cats?.map((cat: any) =>
-    cat.attributes.category.toUpperCase()
-  );
+  let categories = cats?.map((cat: any) => cat.attributes);
+
+  let categorySelected = categories.find((cat: any) => cat.slug === query);
 
   return {
     props: {
       posts,
       categories,
       query,
+      categorySelected,
     },
     revalidate: 60,
   };

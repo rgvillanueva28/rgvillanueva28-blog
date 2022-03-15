@@ -7,6 +7,7 @@ export default function headerSidebar({
   setToggleCategories,
   setToggleMenu,
 }: any) {
+  // console.log(categories)
   return (
     <>
       <div
@@ -35,20 +36,20 @@ export default function headerSidebar({
               </span>
             </div>
           </li>
-          {categories?.map((category: string) => (
+          {categories?.map((category: any) => (
             <li
-              key={category}
+              key={category.slug}
               onClick={() => {
                 setToggleCategories(false);
                 setToggleMenu(false);
               }}
             >
               <Link
-                href={`/categories/${category}`}
-                as={`/categories/${category.toLowerCase()}`}
+                href={`/categories/${category.slug}`}
+                as={`/categories/${category.slug}`}
               >
                 <a className="flex py-2 px-4 hover:text-dark hover:bg-accent-light text-accent-light ">
-                  {category}
+                  {category.category.toUpperCase()}
                 </a>
               </Link>
             </li>
