@@ -60,7 +60,7 @@ function PostCard({
           >
             <img
               alt={title + " card image"}
-              src={`${NEXT_PUBLIC_API_URL}${image?.url}`}
+              src={`${image?.url}`}
               width={image?.width}
               height={image?.height}
               className="object-cover w-full min-h-full"

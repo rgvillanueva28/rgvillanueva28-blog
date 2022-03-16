@@ -86,7 +86,7 @@ export default function Posts({
           <img
             width={post[0].attributes.coverImage.data.attributes.width}
             height={post[0].attributes.coverImage.data.attributes.height}
-            src={`${NEXT_PUBLIC_API_URL}${post[0].attributes.coverImage.data.attributes.url}`}
+            src={`${post[0].attributes.coverImage.data.attributes.url}`}
             alt={post[0].attributes.title + "cover image"}
             className="object-contain mx-auto mt-2 mb-5 md:my-10"
             style={{ maxHeight: 300 }}
