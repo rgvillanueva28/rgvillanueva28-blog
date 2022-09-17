@@ -49,8 +49,22 @@ export default function Categories({
     <Layout categories={categories} className="with-bg">
       <div>
         <Head>
-          <title>RANE GILLIAN | BLOG</title>
-          <link rel="icon" href="/favicon.ico" />
+          <title>Categories - Rane Villanueva | Blog</title>
+          <meta
+            name="description"
+            content="A collection of blog posts crafted from the themes of technology, programming, and personal experiences."
+          />
+          <meta property="og:title" content="Rane Villanueva | Blog" />
+          <meta
+            property="og:description"
+            content="A collection of blog posts crafted from the themes of technology, programming, and personal experiences."
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://blog.ranevillanueva.com/" />
+          <meta
+            property="og:image"
+            content="https://blog.ranevillanueva.com/icon-512x512.png"
+          />
         </Head>
 
         <Hero
@@ -137,7 +151,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
       posts,
       categories,
       query,
-      categorySelected: categorySelected ? categorySelected: null,
+      categorySelected: categorySelected ? categorySelected : null,
     },
     revalidate: 60,
   };

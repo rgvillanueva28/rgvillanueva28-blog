@@ -8,6 +8,7 @@ import type { AppProps } from "next/app";
 import Router from "next/router";
 import NProgress from "nprogress";
 import { useEffect } from "react";
+import Head from "next/head";
 
 NProgress.configure({ showSpinner: false });
 
@@ -24,9 +25,16 @@ function useHighlightAll() {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const newPageProps = { ...pageProps, useHighlightAll }
+  const newPageProps = { ...pageProps, useHighlightAll };
 
-  return <Component { ...newPageProps } />;
+  return (
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <Component {...newPageProps} />
+    </>
+  );
 }
 
 export default MyApp;

@@ -1,10 +1,10 @@
-import Head from "next/head";
 import { motion } from "framer-motion";
 import Layout from "../../components/layout";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
 import Hero from "../../components/hero";
+import SeoComponent from "../../components/seoComponent";
 
 const item = {
   hidden: { y: 20, opacity: 0 },
@@ -40,8 +40,6 @@ export default function Posts({
     );
   }
 
-  console.log(post);
-
   if (!post) {
     return <DefaultErrorPage statusCode={404} />;
   }
@@ -62,9 +60,12 @@ export default function Posts({
 
   return (
     <Layout categories={categories}>
-      <Head>
-        <title>{post[0].attributes.title} - Rane Villanueva | Blog</title>
-      </Head>
+      <SeoComponent
+        title={post[0].attributes.title}
+        excerpt={post[0].attributes.excerpt}
+        imageLink={post[0].attributes.coverImage.data.attributes.url}
+        slug={post[0].attributes.slug}
+      />
       <Hero
         title={post[0].attributes.title}
         date={dateUpdated}
